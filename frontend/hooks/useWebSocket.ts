@@ -7,9 +7,9 @@ export const useProfileWebSocket = (username: string) => {
         if (!username) return;
 
         //const socket = new WebSocket(`ws://localhost:8000/ws/profile/${username}`);
-        const protocol = process.env.NODE_ENV === "production" ? "wss" : "ws";
-        const host = process.env.NEXT_PUBLIC_WS_HOST || "localhost:8000";
-        const socket = new WebSocket(`${protocol}://${host}/ws/profile/${username}`);
+        //const protocol = process.env.NODE_ENV === "production" ? "wss" : "ws";
+        //const host = process.env.NEXT_PUBLIC_WS_HOST || "localhost:8000";
+        const socket = new WebSocket(`wss://portfolio-f8h9.onrender.com/ws/profile/${username}`);
 
         socket.onopen = () => {
             console.log("✅ WebSocket connected");
