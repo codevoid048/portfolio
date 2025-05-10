@@ -1,25 +1,46 @@
 from fastapi import FastAPI, WebSocket
+from pymongo import MongoClient
 import asyncio
-import random
+import os
+from bson import ObjectId
+import datetime
 
 app = FastAPI()
 
-# Mock profile data
-profile_template = {
-    "name": "JohnDoe",
-    "codeforces": {"rank": 10000, "rating": 1300, "problemsSolved": 450},
-    "leetcode": {"rank": 10000, "rating": 1700, "problemsSolved": 520},
-    "gfg": {"rank": 10000, "rating": 1800, "problemsSolved": 320},
-    "codechef": {"rank": 10000, "rating": 1600, "stars": "3* star"}
-}
+# Connect to MongoDB
+MONGO_URI = os.getenv("MONGO_URI", "mongodb://localhost:27017")
+client = MongoClient(MONGO_URI)
+db = client["portfolio"]
+collection = db["users"]
 
-@app.websocket("/ws/profile")
-async def profile_socket(websocket: WebSocket):
+def clean_profile(profile):
+    if "_id" in profile:
+        del profile["_id"]
+    if "lastUpdated" in profile:
+        del profile["lastUpdated"]
+    if "__v" in profile:
+        del profile["__v"]
+    return profile
+
+@app.websocket("/ws/profile/{username}")
+async def profile_socket(websocket: WebSocket, username: str):
     await websocket.accept()
-    while True:
-        # Simulate dynamic rating updates
-        profile_template["codeforces"]["rating"] += random.randint(-5, 5)
-        profile_template["leetcode"]["problemsSolved"] += random.randint(0, 2)
+    print(f"🔌 WebSocket connected for user: {username}")
 
-        await websocket.send_json(profile_template)
-        await asyncio.sleep(5)  # Send updates every 5 seconds
+    try:
+        while True:
+            profile = collection.find_one({"name": username})
+
+            if profile:
+                cleaned = clean_profile(profile)
+                await websocket.send_json(cleaned)
+            else:
+                await websocket.send_json({"error": f"No profile for {username}"})
+
+            await asyncio.sleep(5)
+
+    except Exception as e:
+        print(f"❌ WebSocket Exception: {e}")
+
+    finally:
+        await websocket.close()

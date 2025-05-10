@@ -9,8 +9,18 @@ services:
       - ./backend/.env
     restart: unless-stopped
 
+  fastapi:
+    build: ./fastapi
+    ports:
+      - "8000:8000"
+    env_file:
+      - ./fastapi/.env
+    restart: unless-stopped
+
   frontend:
     build: ./frontend
     ports:
       - "3000:3000"
+    env_file:
+      - ./frontend/.env
     restart: unless-stopped

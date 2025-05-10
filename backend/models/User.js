@@ -5,7 +5,7 @@ const userSchema = new mongoose.Schema({
 
     codeforces: {
         username: { type: String, required: true },
-        rank: Number,
+        rank: String,
         rating: Number,
         problemsSolved: Number
     },

@@ -27,12 +27,11 @@ const createUser = async (name) => {
     }
 }
 
-const checkuser = async (name) => {
+export const checkuser = async (name) => {
     try {
         const user = await User.findOne({ 'name': name });
-        if (!user) {
-            await createUser("code__void");
-        }
+        if(user) return;
+        else await createUser("code__void");
         return;
     }
     catch (error) {
@@ -43,7 +42,6 @@ const checkuser = async (name) => {
 
 export const updateGFGDetails = async (username) => {
     try {
-        await checkuser(username);
         const gfgData = await getGFGdata(username);
         if (gfgData.error) {
             console.error(`Error fetching GFG data for user ${username}: ${gfgData.error}`);
@@ -68,7 +66,6 @@ export const updateGFGDetails = async (username) => {
 
 export const updateCodeforcesDetails = async (username) => {
     try {
-        await checkuser(username);
         const user = await User.findOne({ 'codeforces.username': username });
 
         if (!user) {
@@ -90,7 +87,7 @@ export const updateCodeforcesDetails = async (username) => {
         const totalSolved = solvedProblems.size;
         user.codeforces.problemsSolved = totalSolved || user.codeforces.problemsSolved || 0;
         user.codeforces.rating = userInfo.rating || user.codeforces.rating || 0;
-        user.codeforces.rank = userInfo.rank || user.codeforces.rank || 0;
+        user.codeforces.rank = userInfo.rank || user.codeforces.rank || "";
         user.codeforces.lastUpdated = new Date();
 
         await user.save();
@@ -102,7 +99,6 @@ export const updateCodeforcesDetails = async (username) => {
 
 export const updateLeetcodeDetails = async (username) => {
     try {
-        await checkuser(username);
         const user = await User.findOne({ 'leetcode.username': username });
 
         if (!user) {
@@ -154,7 +150,6 @@ export const updateLeetcodeDetails = async (username) => {
 
 export const updateCodechefDetails = async (username) => {
     try {
-        await checkuser(username);
         const user = await User.findOne({ 'codechef.username': username });
 
         if (!user) {
