@@ -4,23 +4,24 @@ import asyncio
 import os
 from bson import ObjectId
 import datetime
+from starlette.websockets import WebSocketState
 
 app = FastAPI()
 
-# Connect to MongoDB
 MONGO_URI = os.getenv("MONGO_URI", "mongodb://localhost:27017")
 client = MongoClient(MONGO_URI)
 db = client["portfolio"]
 collection = db["users"]
 
 def clean_profile(profile):
-    if "_id" in profile:
-        del profile["_id"]
-    if "lastUpdated" in profile:
-        del profile["lastUpdated"]
-    if "__v" in profile:
-        del profile["__v"]
+    profile.pop("_id", None)
+    profile.pop("lastUpdated", None)
+    profile.pop("__v", None)
     return profile
+
+@app.get("/health")
+def health_check():
+    return {"status": "ok"}
 
 @app.websocket("/ws/profile/{username}")
 async def profile_socket(websocket: WebSocket, username: str):
@@ -30,17 +31,18 @@ async def profile_socket(websocket: WebSocket, username: str):
     try:
         while True:
             profile = collection.find_one({"name": username})
-
             if profile:
                 cleaned = clean_profile(profile)
                 await websocket.send_json(cleaned)
             else:
                 await websocket.send_json({"error": f"No profile for {username}"})
-
             await asyncio.sleep(5)
 
     except Exception as e:
         print(f"❌ WebSocket Exception: {e}")
 
     finally:
-        await websocket.close()
+        if websocket.client_state != WebSocketState.DISCONNECTED:
+            await websocket.close()
+        print("INFO: connection closed")
+        print(f"🔌 WebSocket disconnected for user: {username}")
