@@ -2,9 +2,9 @@ import cron from 'node-cron';
 import { checkuser, updateGFGDetails, updateCodeforcesDetails, updateLeetcodeDetails, updateCodechefDetails } from "../controllers/updateDetails.js";
 
 export const updateDetailscron = () => {
-    // Schedule task to run every hour
+    // Schedule task to run every 15 minutes
     console.log('Starting cron job to update coding profiles...');
-    cron.schedule('0 * * * *', async () => {
+    cron.schedule('*/15 * * * *', async () => {
         try {
             console.log('Running cron job to update coding profiles...');
             await checkuser('code__void');
