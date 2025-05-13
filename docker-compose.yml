@@ -5,8 +5,6 @@ services:
     build: ./backend
     ports:
       - "5000:5000"
-    env_file:
-      - ./backend/.env
     restart: unless-stopped
 
   fastapi:
@@ -21,6 +19,4 @@ services:
     build: ./frontend
     ports:
       - "3000:3000"
-    env_file:
-      - ./frontend/.env
     restart: unless-stopped

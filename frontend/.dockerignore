@@ -1,2 +1,4 @@
+.git
+.next/cache
 node_modules
-.env*
+*.log

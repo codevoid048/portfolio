@@ -1,4 +1,5 @@
 import cron from 'node-cron';
+import axios from 'axios';
 import { checkuser, updateGFGDetails, updateCodeforcesDetails, updateLeetcodeDetails, updateCodechefDetails } from "../controllers/updateDetails.js";
 
 export const updateDetailscron = () => {
@@ -16,6 +17,20 @@ export const updateDetailscron = () => {
         }
         catch (error) {
             console.error('Error updating coding profiles:', error);
+        }
+    });
+}
+
+export const pingService = () => {
+    // Schedule ping to FastAPI every 5 minutes
+    cron.schedule('*/5 * * * *', async () => {
+        try {
+            console.log('Pinging FastAPI...');
+            await axios.get("https://portfolio-f8h9.onrender.com/health");
+            await axios.get("https://williams-portfolio.onrender.com/");
+            console.log('FastAPI pinged successfully!');
+        } catch (error) {
+            console.error('Error pinging FastAPI:', error);
         }
     });
 }

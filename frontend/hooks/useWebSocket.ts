@@ -2,17 +2,20 @@ import { useEffect, useState } from "react";
 
 export const useProfileWebSocket = (username: string) => {
     const [profile, setProfile] = useState(null);
+    const [retryCount, setRetryCount] = useState(0);
 
     useEffect(() => {
         if (!username) return;
-
-        //const socket = new WebSocket(`ws://localhost:8000/ws/profile/${username}`);
-        //const protocol = process.env.NODE_ENV === "production" ? "wss" : "ws";
-        //const host = process.env.NEXT_PUBLIC_WS_HOST || "localhost:8000";
         const socket = new WebSocket(`wss://portfolio-f8h9.onrender.com/ws/profile/${username}`);
 
         socket.onopen = () => {
             console.log("✅ WebSocket connected");
+        };
+
+        const handleReconnect = () => {
+            if (retryCount < 3) {
+                setTimeout(() => setRetryCount(c => c + 1), 2000);
+            }
         };
 
         socket.onmessage = (event) => {
@@ -30,10 +33,11 @@ export const useProfileWebSocket = (username: string) => {
 
         socket.onclose = () => {
             console.log("❌ WebSocket disconnected");
+            handleReconnect();
         };
 
-        return () => socket.close();
-    }, [username]);
+        return () => { socket.close(1000, "Component unmounted"); };
+    }, [username, retryCount]);
 
     return profile;
 };

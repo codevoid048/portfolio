@@ -30,6 +30,9 @@ async def profile_socket(websocket: WebSocket, username: str):
 
     try:
         while True:
+            if websocket.client_state == WebSocketState.DISCONNECTED:
+                break
+
             profile = collection.find_one({"name": username})
             if profile:
                 cleaned = clean_profile(profile)
@@ -40,9 +43,8 @@ async def profile_socket(websocket: WebSocket, username: str):
 
     except Exception as e:
         print(f"❌ WebSocket Exception: {e}")
+        if websocket.client_state != WebSocketState.DISCONNECTED:
+            await websocket.close(code=1001)
 
     finally:
-        if websocket.client_state != WebSocketState.DISCONNECTED:
-            await websocket.close()
-        print("INFO: connection closed")
         print(f"🔌 WebSocket disconnected for user: {username}")
