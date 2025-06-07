@@ -3,7 +3,7 @@ import { motion } from "framer-motion"
 import Image from "next/image"
 import { Trophy, Star, Code, Hash } from "lucide-react"
 import { AnimatedBackground } from "@/components/ui/animated-background"
-import { useProfileWebSocket } from "@/hooks/useWebsocket"
+import { useProfileWebSocket } from "@/hooks/useProfileWebSocket"
 
 export default function CPProfiles() {
     const [profiles, setProfiles] = useState<any[]>([])
