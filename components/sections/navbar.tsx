@@ -69,6 +69,7 @@ export default function Navbar() {
             <NavItem label="About" sectionId="about" onClick={handleNavigation} />
             <NavItem label="Skills" sectionId="skills" onClick={handleNavigation} />
             <NavItem label="Projects" sectionId="projects" onClick={handleNavigation} />
+            <NavItem label="CP Profiles" sectionId="cp-profiles" onClick={handleNavigation} />
             <NavItem label="Achievements" sectionId="achievements" onClick={handleNavigation} />
             <NavItem label="Contact" sectionId="contact" onClick={handleNavigation} />
           </motion.nav>
@@ -108,6 +109,7 @@ export default function Navbar() {
                 <MobileNavItem label="About" sectionId="about" onClick={handleNavigation} />
                 <MobileNavItem label="Skills" sectionId="skills" onClick={handleNavigation} />
                 <MobileNavItem label="Projects" sectionId="projects" onClick={handleNavigation} />
+                <MobileNavItem label="CP Profiles" sectionId="cp-profiles" onClick={handleNavigation} />
                 <MobileNavItem label="Achievements" sectionId="achievements" onClick={handleNavigation} />
                 <MobileNavItem label="Contact" sectionId="contact" onClick={handleNavigation} />
               </nav>
