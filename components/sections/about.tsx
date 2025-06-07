@@ -41,7 +41,7 @@ export default function About() {
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.4 }}
           >
-            With good global rankings on platforms like Codeforces, CodeChef, and GeeksForGeeks, I’ve consistently proven my problem-solving abilities. I’ve also led the development of impactful projects such as an AI Yoga Assistant and CodeQuest. I'm currently working as a Web Developer at SRKR Institute, where I focus on enhancing user experience. Always eager to explore cutting-edge tech and build solutions that matter.
+            With good global rankings on platforms like Codeforces, CodeChef, and GeeksForGeeks, I’ve consistently proven my problem-solving abilities. I’ve also led the development of impactful projects such as an AI Yoga Assistant and CodeQuest. Always eager to explore cutting-edge tech and build solutions that matter.
           </motion.p>
 
             <motion.div
