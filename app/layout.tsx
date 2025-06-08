@@ -20,9 +20,9 @@ export const metadata: Metadata = {
     description: "Full Stack Developer portfolio",
     images: [
       {
-        url: "/logo.png",
-        width: 800,
-        height: 800,
+        url: "/ppk.png",
+        width: 1200,
+        height: 630,
         alt: "William Portfolio Logo",
       },
     ],
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "William Keri | Portfolio",
     description: "Full Stack Developer portfolio",
-    images: ["/logo.png"],
+    images: ["/ppk.png"],
   },
 }
 
