@@ -7,9 +7,32 @@ import { ThemeProvider } from "@/components/theme-provider"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://williams-portfolio-eta.vercel.app"),
   title: "William Keri | Portfolio",
   description: "Personal portfolio website of William Keri, Full Stack Developer",
-    generator: 'v0.dev'
+  icons: {
+    icon: "/logo.png",
+    shortcut: "/logo.png",
+    apple: "/logo.png",
+  },
+  openGraph: {
+    title: "William | Portfolio",
+    description: "Full Stack Developer portfolio",
+    images: [
+      {
+        url: "/logo.png",
+        width: 800,
+        height: 800,
+        alt: "William Portfolio Logo",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "William Keri | Portfolio",
+    description: "Full Stack Developer portfolio",
+    images: ["/logo.png"],
+  },
 }
 
 export default function RootLayout({
