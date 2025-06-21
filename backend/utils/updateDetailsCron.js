@@ -5,10 +5,10 @@ import { checkuser, updateGFGDetails, updateCodeforcesDetails, updateLeetcodeDet
 // Configuration
 const MAX_RETRIES = 3;
 const RETRY_DELAY_MS = 10000; // 5 seconds between retries
-const SERVICES_TO_PING = [
-    { name: 'FastAPI', url: 'https://portfolio-f8h9.onrender.com/health' },
-    { name: 'Frontend', url: 'https://williams-portfolio.onrender.com/' }
-];
+// const SERVICES_TO_PING = [
+//     { name: 'FastAPI', url: 'https://portfolio-f8h9.onrender.com/health' },
+//     { name: 'Frontend', url: 'https://williams-portfolio.onrender.com/' }
+// ];
 
 // Helper function with retry logic
 async function withRetries(fn, taskName, maxRetries = MAX_RETRIES) {
@@ -63,23 +63,23 @@ export const updateDetailscron = () => {
     });
 };
 
-export const pingService = () => {
-    console.log('Starting ping service...');
+// export const pingService = () => {
+//     console.log('Starting ping service...');
 
-    cron.schedule('*/10 * * * *', async () => {
-        console.log('Running ping service...');
+//     cron.schedule('*/10 * * * *', async () => {
+//         console.log('Running ping service...');
 
-        for (const service of SERVICES_TO_PING) {
-            try {
-                await withRetries(
-                    () => axios.get(service.url, { timeout: 10000 }),
-                    `${service.name} Ping`
-                );
-                console.log(`[${service.name}] Ping successful`);
-            } catch (error) {
-                console.error(`[${service.name}] Ping failed after ${MAX_RETRIES} attempts:`, error.message);
-                // Add notification logic here if needed
-            }
-        }
-    });
-};
+//         for (const service of SERVICES_TO_PING) {
+//             try {
+//                 await withRetries(
+//                     () => axios.get(service.url, { timeout: 10000 }),
+//                     `${service.name} Ping`
+//                 );
+//                 console.log(`[${service.name}] Ping successful`);
+//             } catch (error) {
+//                 console.error(`[${service.name}] Ping failed after ${MAX_RETRIES} attempts:`, error.message);
+//                 // Add notification logic here if needed
+//             }
+//         }
+//     });
+// };
