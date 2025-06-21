@@ -28,29 +28,25 @@ async def profile_socket(websocket: WebSocket, username: str):
 
     try:
         while True:
-            # Check if connection is still active
-            if websocket.client_state == WebSocketState.DISCONNECTED:
+            # Check connection state
+            if websocket.client_state != WebSocketState.CONNECTED:
                 break
 
-            try:
-                profile = collection.find_one({"name": username})
-                if profile:
-                    await websocket.send_json(clean_profile(profile))
-                else:
-                    await websocket.send_json({"error": "Profile not found"})
-                
-                await asyncio.sleep(5)
+            profile = collection.find_one({"name": username})
+            if profile:
+                await websocket.send_json(clean_profile(profile))
+            else:
+                await websocket.send_json({"error": "Profile not found"})
 
-            except WebSocketDisconnect:
-                break
-                
-            except Exception as e:
-                print(f"Error during update for {username}: {str(e)}")
-                await asyncio.sleep(5)  # Wait before retrying
-                continue
+            await asyncio.sleep(5)
+
+    except WebSocketDisconnect:
+        print(f"WebSocket disconnected for: {username}")
 
     except Exception as e:
         print(f"WebSocket error for {username}: {str(e)}")
 
     finally:
-        print(f"WebSocket disconnected for: {username}")
+        if websocket.client_state == WebSocketState.CONNECTED:
+            await websocket.close()
+        print(f"WebSocket disconnected finally for: {username}")

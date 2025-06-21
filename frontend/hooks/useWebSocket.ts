@@ -6,7 +6,7 @@ export const useProfileWebSocket = (username: string) => {
 
     useEffect(() => {
         if (!username) return;
-        const socket = new WebSocket(`wss://portfolio-f8h9.onrender.com/ws/profile/${username}`);
+        const socket = new WebSocket(`wss://p01--portfolio-fastapi--qcpsyyc7mxwb.code.run/ws/profile/${username}`);
 
         // socket.onopen = () => {
         //     console.log("WebSocket connected");
