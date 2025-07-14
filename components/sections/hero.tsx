@@ -89,11 +89,11 @@ export default function Hero() {
             <SocialButton icon={<Twitter />} href="https://x.com/code__void" label="Twitter" />
             <SocialButton icon={<Mail />} href="#contact" label="Contact" />
 
-            <a href='/resume.pdf' download>
+            {/* <a href='/resume.pdf' download>
             <Button className="bg-violet-700 hover:bg-violet-600 shadow-[0_0_15px_rgba(139,92,246,0.3)] transition-all duration-300 hover:shadow-[0_0_20px_rgba(139,92,246,0.6)]">
               <Download className="mr-2 h-4 w-4" /> Download Resume
             </Button>
-            </a>
+            </a> */}
           </motion.div>
         </motion.div>
 

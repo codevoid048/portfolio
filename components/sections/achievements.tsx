@@ -7,10 +7,10 @@ import { AnimatedBackground } from "@/components/ui/animated-background"
 export default function Achievements() {
   const achievements = [
     {
-      title: "Bachelor's Degree in Computer Science",
-      date: "2023 - Present",
-      description: "Pursuing with 8.1 CGPA at SRKREC, Bhimavaram",
-      icon: <GraduationCap className="h-6 w-6" />,
+      title: "Full Stack Developer Intern",
+      date: "July 2025 - Present",
+      description: "Gaining hands-on experience with modern AI infra design and Python backend development",
+      icon: <Briefcase className="h-6 w-6" />,
     },
     {
       title: "Ranking #4 on GFG",

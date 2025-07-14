@@ -21,9 +21,17 @@ export default function Projects() {
       description:
         "An AI-powered yoga assistant that provides personalized yoga routines and guidance.",
       image: "/ai-yoga.jpg?height=400&width=600",
-      tags: ["React", "Node.js", "MongoDB", "TensorFlow move-net"],
+      tags: ["React.js", "Node.js", "MongoDB", "TensorFlow move-net"],
       //github: "",
       demo: "https://aiyogatutor.netlify.app/",
+    },
+    {
+      title: "Geo-location Based Attendance System",
+      description:
+        "Automatic Attendance Tracking System that checks in employees within a 200-meter office radius and check them out upon their departure.",
+      image: "/geo-attendance.webp?height=400&width=600",
+      tags: ["React.js", "Node.js", "MongoDB"],
+      github: "https://github.com/codevoid048/sih-gail-web/tree/master",
     }
   ]
 
