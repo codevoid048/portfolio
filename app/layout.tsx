@@ -41,16 +41,16 @@ export const metadata: Metadata = {
     "TypeScript Developer",
   ],
   icons: {
-    icon: "/logo1.png",
-    shortcut: "/logo1.png",
-    apple: "/logo1.png",
+    icon: "/logo1.jpg",
+    shortcut: "/logo1.jpg",
+    apple: "/logo1.jpg",
   },
   openGraph: {
     title: "William | Portfolio",
     description: "Full Stack Developer, Competitive Programmer, and ML Enthusiast",
     images: [
       {
-        url: "https://williams-portfolio-eta.vercel.app/logo1.png",
+        url: "https://williams-portfolio-eta.vercel.app/logo1.jpg",
         width: 1200,
         height: 630,
         alt: "William Portfolio Logo",
@@ -62,7 +62,7 @@ export const metadata: Metadata = {
     title: "William Keri | Portfolio",
     description: "Full Stack Developer, Competitive Programmer, and ML Enthusiast",
     creator: "@code__void",
-    images: ["https://williams-portfolio-eta.vercel.app/logo1.png"],
+    images: ["https://williams-portfolio-eta.vercel.app/logo1.jpg"],
   },
 }
 
