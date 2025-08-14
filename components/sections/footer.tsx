@@ -1,7 +1,14 @@
 import { motion } from "framer-motion"
 import { Github, Linkedin, Mail, Twitter } from "lucide-react"
+import { useEffect, useState } from "react"
 
 export default function Footer() {
+  const [currentYear, setCurrentYear] = useState(0) // Default to current year
+
+  useEffect(() => {
+    setCurrentYear(new Date().getFullYear())
+  }, [])
+
   return (
     <footer className="py-8 bg-black border-t border-gray-800 relative overflow-hidden">
       <div className="container mx-auto px-4">
@@ -13,7 +20,7 @@ export default function Footer() {
             transition={{ duration: 0.5 }}
           >
             <p className="text-gray-400 text-center">
-              &copy; {new Date().getFullYear()} William (code__void) &nbsp;
+              &copy; {currentYear} William (code__void) &nbsp;
             </p>
           </motion.div>
 

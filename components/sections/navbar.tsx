@@ -8,7 +8,6 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
 
-  // Handle scroll event to change navbar background
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 50) {
@@ -24,11 +23,26 @@ export default function Navbar() {
 
   // Handle navigation and close mobile menu
   const handleNavigation = (sectionId: string) => {
-    setIsOpen(false)
     const element = document.getElementById(sectionId)
     if (element) {
       element.scrollIntoView({ behavior: "smooth" })
+      setTimeout(() => {
+        setIsOpen(false)
+      }, 300)
+    } else {
+      setIsOpen(false)
     }
+  }
+
+  const handleMobileNavigation = (sectionId: string) => {
+    setIsOpen(false)
+    
+    setTimeout(() => {
+      const element = document.getElementById(sectionId)
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth", block: "start" })
+      }
+    }, 100)
   }
 
   return (
@@ -106,12 +120,12 @@ export default function Navbar() {
           >
             <div className="container mx-auto px-4 py-4">
               <nav className="flex flex-col space-y-2">
-                <MobileNavItem label="About" sectionId="about" onClick={handleNavigation} />
-                <MobileNavItem label="Skills" sectionId="skills" onClick={handleNavigation} />
-                <MobileNavItem label="Projects" sectionId="projects" onClick={handleNavigation} />
-                <MobileNavItem label="CP Profiles" sectionId="cp-profiles" onClick={handleNavigation} />
-                <MobileNavItem label="Achievements" sectionId="achievements" onClick={handleNavigation} />
-                <MobileNavItem label="Contact" sectionId="contact" onClick={handleNavigation} />
+                <MobileNavItem label="About" sectionId="about" onClick={handleMobileNavigation} />
+                <MobileNavItem label="Skills" sectionId="skills" onClick={handleMobileNavigation} />
+                <MobileNavItem label="Projects" sectionId="projects" onClick={handleMobileNavigation} />
+                <MobileNavItem label="CP Profiles" sectionId="cp-profiles" onClick={handleMobileNavigation} />
+                <MobileNavItem label="Achievements" sectionId="achievements" onClick={handleMobileNavigation} />
+                <MobileNavItem label="Contact" sectionId="contact" onClick={handleMobileNavigation} />
               </nav>
             </div>
           </motion.div>
@@ -138,10 +152,15 @@ function MobileNavItem({
   sectionId,
   onClick,
 }: { label: string; sectionId: string; onClick: (id: string) => void }) {
+  const handleClick = () => {
+    console.log(`Navigating to: ${sectionId}`) // Debug log
+    onClick(sectionId)
+  }
+
   return (
     <button
-      onClick={() => onClick(sectionId)}
-      className="w-full text-left px-4 py-3 text-gray-300 hover:text-white hover:bg-violet-700/20 rounded-md transition-colors duration-300"
+      onClick={handleClick}
+      className="w-full text-left px-4 py-3 text-gray-300 hover:text-white hover:bg-violet-700/20 rounded-md transition-colors duration-300 active:bg-violet-700/30"
     >
       {label}
     </button>
