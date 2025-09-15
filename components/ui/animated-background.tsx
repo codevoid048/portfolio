@@ -90,6 +90,11 @@ function ParallaxStars() {
     }
   }, [])
 
+  const left = `${Math.random() * 100}%`
+  const top = `${Math.random() * 100}%`
+  const duration = Math.random() * 5 + 5
+  const delay = Math.random() * 5
+
   return (
     <div ref={starsRef} className="absolute inset-0 transition-transform duration-200 ease-out">
       {Array.from({ length: 50 }).map((_, i) => {

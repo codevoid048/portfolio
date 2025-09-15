@@ -181,7 +181,7 @@ function ResumeContent() {
 
         {/* Fallback Message */}
         <div className="mt-4 text-center">
-          <p className="text-gray-400 text-sm mb-3">Can't see the resume? No worries!</p>
+          {/* <p className="text-gray-400 text-sm mb-3">Can't see the resume? No worries!</p> */}
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Button
               asChild

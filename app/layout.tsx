@@ -11,16 +11,17 @@ const jsonLdPerson = {
   "@context": "https://schema.org",
   "@type": "Person",
   "name": "William Keri",
-  "url": "https://williams-portfolio-eta.vercel.app",
+  "url": "https://codevoid.site",
   "jobTitle": ["Full Stack Developer", "Software Engineer", "ML Engineer"],
   "sameAs": [
     "https://linkedin.com/in/codevoid",
-    "https://github.com/codevoid048"
+    "https://github.com/codevoid048",
+    "https://x.com/code__void",
   ]
 }
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://williams-portfolio-eta.vercel.app"),
+  metadataBase: new URL("https://codevoid.site"),
   title: "William Keri | Portfolio",
   description: "Personal portfolio website of William Keri, Full Stack Developer",
   authors: [{ name: "William Keri", url: "https://linkedin.com/in/codevoid" }],
@@ -50,10 +51,10 @@ export const metadata: Metadata = {
     description: "Full Stack Developer, Competitive Programmer, and ML Enthusiast",
     images: [
       {
-        url: "https://williams-portfolio-eta.vercel.app/logo1.jpg",
+        url: "https://codevoid.site/logo1.jpg",
         width: 1200,
         height: 630,
-        alt: "William Portfolio Logo",
+        alt: "William Portfolio",
       },
     ],
   },
@@ -62,7 +63,7 @@ export const metadata: Metadata = {
     title: "William Keri | Portfolio",
     description: "Full Stack Developer, Competitive Programmer, and ML Enthusiast",
     creator: "@code__void",
-    images: ["https://williams-portfolio-eta.vercel.app/logo1.jpg"],
+    images: ["https://codevoid.site/logo1.jpg"],
   },
 }
 

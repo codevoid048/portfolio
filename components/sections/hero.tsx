@@ -11,7 +11,7 @@ export default function Hero() {
     <section
       id="home"
       ref={containerRef}
-      className="relative py-32 md:py-48 flex items-center justify-center overflow-hidden"
+      className="relative pt-32 md:pt-48 pb-16 md:pb-24 flex items-center justify-center overflow-hidden"
     >
       <ParticleBackground />
 
@@ -52,7 +52,7 @@ export default function Hero() {
           </motion.p>
 
           <motion.div
-            className="flex flex-wrap gap-6 justify-center"
+            className="flex flex-wrap sm:gap:4 md:gap-6 lg:gap-6 justify-center mt-10"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 1 }}

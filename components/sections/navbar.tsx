@@ -139,7 +139,7 @@ function NavItem({ label, sectionId, onClick }: { label: string; sectionId: stri
   return (
     <button
       onClick={() => onClick(sectionId)}
-      className="px-4 py-2 text-gray-300 hover:text-white transition-colors duration-300 relative group"
+      className="relative px-4 py-2 text-gray-300 transition-all duration-300 group bg-clip-text text-transparent bg-gradient-to-r from-violet-200 to-purple-500 hover:from-purple-600 hover:to-violet-400"
     >
       {label}
       <span className="absolute bottom-0 left-0 w-full h-0.5 bg-violet-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></span>
@@ -147,20 +147,20 @@ function NavItem({ label, sectionId, onClick }: { label: string; sectionId: stri
   )
 }
 
+
 function MobileNavItem({
   label,
   sectionId,
   onClick,
 }: { label: string; sectionId: string; onClick: (id: string) => void }) {
   const handleClick = () => {
-    console.log(`Navigating to: ${sectionId}`) // Debug log
     onClick(sectionId)
   }
 
   return (
     <button
       onClick={handleClick}
-      className="w-full text-left px-4 py-3 text-gray-300 hover:text-white hover:bg-violet-700/20 rounded-md transition-colors duration-300 active:bg-violet-700/30"
+      className="relative w-full px-4 py-2 text-gray-300 transition-all duration-300 group bg-clip-text text-transparent bg-gradient-to-r from-violet-200 to-purple-500 hover:from-purple-600 hover:to-violet-400"
     >
       {label}
     </button>

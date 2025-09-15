@@ -11,16 +11,16 @@ export default function Projects() {
       title: "CodeQuest",
       description:
         "A POTD platform for enhancing the problem solving skills. And also a coding profile aggregator that syncs user stats across LeetCode, Codeforces, GFG, and CodeChef.",
-      image: "/codequest.jpg?height=400&width=600",
+      image: "/codequest.jpg",
       tags: ["TypeScript", "TypeSense", "Express", "MongoDB"],
       github: "https://github.com/codevoid048/codequest",
-      //demo: "https://example.com",
+      demo: "https://codequest.srkrcodingclub.in",
     },
     {
       title: "AI Yoga Assistant",
       description:
         "An AI-powered yoga assistant that provides personalized yoga routines and guidance.",
-      image: "/ai-yoga.jpg?height=400&width=600",
+      image: "/ai-yoga.jpg",
       tags: ["React.js", "Node.js", "MongoDB", "TensorFlow move-net"],
       //github: "",
       demo: "https://aiyogatutor.netlify.app/",
@@ -29,7 +29,7 @@ export default function Projects() {
       title: "Geo-location Based Attendance System",
       description:
         "Automatic Attendance Tracking System that checks in employees within a 200-meter office radius and check them out upon their departure.",
-      image: "/geo-attendance.webp?height=400&width=600",
+      image: "/geo-attendance.webp",
       tags: ["React.js", "Node.js", "MongoDB"],
       github: "https://github.com/codevoid048/sih-gail-web/tree/master",
     }
@@ -76,8 +76,8 @@ function ProjectCard({
     description: string
     image: string
     tags: string[]
-    github: string
-    demo: string
+    github?: string
+    demo?: string
   }
   index: number
 }) {
@@ -98,7 +98,8 @@ function ProjectCard({
         <Image
           src={project.image || "/placeholder.svg"}
           alt={project.title}
-          fill
+          width={600}
+          height={400}
           className="object-cover transition-transform duration-700 group-hover:scale-110"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent opacity-70"></div>
@@ -112,7 +113,7 @@ function ProjectCard({
         <p className="text-gray-300 mb-4 line-clamp-3">{project.description}</p>
 
         <div className="flex flex-wrap gap-2 mb-4">
-          {project.tags.map((tag, tagIndex) => (
+          {project.tags?.map((tag, tagIndex) => (
             <Badge
               key={tagIndex}
               variant="outline"
