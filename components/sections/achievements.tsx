@@ -7,6 +7,12 @@ import { AnimatedBackground } from "@/components/ui/animated-background"
 export default function Achievements() {
   const achievements = [
     {
+      title: "Freelance Full Stack Developer",
+      date: "July 2025 - Present",
+      description: "Providing end-to-end freelance services including frontend design, backend development, and deployment for diverse client projects",
+      icon: <Briefcase className="h-6 w-6" />,
+    },
+    {
       title: "Full Stack Developer Intern",
       date: "July 2025 - Present",
       description: "Gaining hands-on experience with modern AI infra design and Python backend development",
