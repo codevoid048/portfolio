@@ -1,12 +1,15 @@
+import type React from "react"
 import { useState } from "react"
 import Image from "next/image"
-import { motion } from "framer-motion"
+import { motion, AnimatePresence } from "framer-motion"
 import { ExternalLink, Github } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 import { AnimatedBackground } from "@/components/ui/animated-background"
 
 export default function Projects() {
-  const projects = [
+  const [activeTab, setActiveTab] = useState<"personal" | "freelance">("personal")
+
+  const personalProjects = [
     {
       title: "CodeQuest",
       description:
@@ -35,6 +38,17 @@ export default function Projects() {
     }
   ]
 
+  const freelanceProjects = [
+    {
+      title: "The Raja Cycle Stores",
+      description:
+        "Developed a scalable serverless e-commerce platform with robust cloud infrastructure using AWS Lambda, S3, and CloudFormation. Implemented Redis caching for backend optimization and integrated Cloudflare for global CDN to enhance performance. Designed secure APIs for product management, demonstrating expertise in full-stack development and cloud-native architecture.",
+      image: "/cycle-store.webp",
+      tags: ["Next.js", "TypeScript", "Node.js", "Express.js", "AWS Lambda", "AWS S3", "Cloudflare CDN", "MongoDB", "Redis"],
+      demo: "https://www.therajacyclestores.com",
+    }
+  ]
+
   return (
     <section id="projects" className="py-20 bg-gray-900/50 relative overflow-hidden">
       {/* Animated background */}
@@ -42,7 +56,7 @@ export default function Projects() {
 
       <div className="container mx-auto px-4 relative z-10">
         <motion.div
-          className="animate-on-scroll"
+          className="animate-on-scroll max-w-6xl mx-auto"
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
@@ -54,16 +68,98 @@ export default function Projects() {
             </span>
           </h2>
 
-          <div className="flex flex-wrap justify-center gap-8">
-            {projects.map((project, index) => (
-              <div key={index} className="w-full sm:w-[45%] lg:w-[30%]">
-                  <ProjectCard key={index} project={project} index={index} />
-              </div>
-            ))}
+          {/* Tab Toggle */}
+          <div className="mb-12">
+            <div className="bg-gray-800/50 p-1.5 rounded-full flex w-fit mx-auto shadow-inner">
+              <TabButton active={activeTab === "personal"} onClick={() => setActiveTab("personal")}>
+                Personal Projects
+              </TabButton>
+              <TabButton active={activeTab === "freelance"} onClick={() => setActiveTab("freelance")}>
+                Freelance Experience
+              </TabButton>
+            </div>
+          </div>
+
+          {/* Tab Content */}
+          <div className="min-h-[600px]">
+            <AnimatePresence>
+              {activeTab === "personal" && (
+                <PersonalProjectsContent projects={personalProjects} />
+              )}
+              {activeTab === "freelance" && (
+                <FreelanceProjectsContent projects={freelanceProjects} />
+              )}
+            </AnimatePresence>
           </div>
         </motion.div>
       </div>
     </section>
+  )
+}
+
+function TabButton({
+  active,
+  onClick,
+  children,
+}: {
+  active: boolean
+  onClick: () => void
+  children: React.ReactNode
+}) {
+  return (
+    <button
+      onClick={onClick}
+      className={`px-8 py-3 rounded-full font-medium transition-all duration-300 relative ${
+        active
+          ? "bg-violet-600 text-white shadow-lg shadow-violet-600/25"
+          : "text-gray-300 hover:text-white hover:bg-gray-700/50"
+      }`}
+    >
+      {children}
+      {active && (
+        <motion.div
+          layoutId="activeTab"
+          className="absolute inset-0 bg-violet-600 rounded-full -z-10 shadow-lg shadow-violet-600/25"
+          transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+        />
+      )}
+    </button>
+  )
+}
+
+function PersonalProjectsContent({ projects }: { projects: any[] }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -20 }}
+      transition={{ duration: 0.5 }}
+    >
+      <div className="flex flex-wrap justify-center gap-8">
+        {projects.map((project, index) => (
+          <div key={index} className="w-full sm:w-[45%] lg:w-[30%]">
+            <ProjectCard project={project} index={index} />
+          </div>
+        ))}
+      </div>
+    </motion.div>
+  )
+}
+
+function FreelanceProjectsContent({ projects }: { projects: any[] }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -20 }}
+      transition={{ duration: 0.5 }}
+    >
+      <div className="max-w-5xl mx-auto">
+        {projects.map((project, index) => (
+          <FreelanceProjectCard key={index} project={project} index={index} />
+        ))}
+      </div>
+    </motion.div>
   )
 }
 
@@ -152,6 +248,96 @@ function ProjectCard({
       {/* Glowing effect on hover */}
       <motion.div
         className="absolute inset-0 pointer-events-none"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: isHovered ? 1 : 0 }}
+        transition={{ duration: 0.3 }}
+      >
+        <div className="absolute inset-0 bg-gradient-to-tr from-violet-600/10 to-purple-600/10"></div>
+        <div className="absolute -inset-0.5 bg-gradient-to-tr from-violet-600/0 to-purple-600/0 group-hover:from-violet-600/20 group-hover:to-purple-600/20 rounded-xl blur-xl transition-all duration-500"></div>
+      </motion.div>
+    </motion.div>
+  )
+}
+
+function FreelanceProjectCard({
+  project,
+  index,
+}: {
+  project: {
+    title: string
+    description: string
+    image: string
+    tags: string[]
+    github?: string
+    demo?: string
+  }
+  index: number
+}) {
+  const [isHovered, setIsHovered] = useState(false)
+
+  return (
+    <motion.div
+      className="group relative bg-gray-900/80 backdrop-blur-sm rounded-xl overflow-hidden border border-gray-800 hover:border-violet-700/50 transition-all duration-500 hover:shadow-[0_0_30px_rgba(139,92,246,0.2)]"
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5, delay: index * 0.1 }}
+      whileHover={{ y: -5 }}
+      onHoverStart={() => setIsHovered(true)}
+      onHoverEnd={() => setIsHovered(false)}
+    >
+      <div className="flex flex-col lg:flex-row">
+        {/* Image Section */}
+        <div className="relative w-full lg:w-3/5 h-80 lg:h-auto overflow-hidden">
+          <Image
+            src={project.image || "/placeholder.svg"}
+            alt={project.title}
+            width={600}
+            height={400}
+            className="object-cover w-full h-full transition-transform duration-700 group-hover:scale-105"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-gray-900/50 to-transparent lg:bg-gradient-to-r"></div>
+        </div>
+
+        {/* Content Section */}
+        <div className="w-full lg:w-2/5 p-6 lg:p-8 flex flex-col justify-center">
+          <h3 className="text-2xl font-bold mb-4 text-white group-hover:text-violet-400 transition-colors duration-300">
+            {project.title}
+          </h3>
+
+          <p className="text-gray-300 mb-6 leading-relaxed">{project.description}</p>
+
+          <div className="flex flex-wrap gap-2 mb-6">
+            {project.tags?.map((tag, tagIndex) => (
+              <Badge
+                key={tagIndex}
+                variant="outline"
+                className="bg-gray-800/50 text-violet-300 border-violet-700/30 hover:bg-violet-700/20"
+              >
+                {tag}
+              </Badge>
+            ))}
+          </div>
+
+          <div className="flex gap-4">
+            {project.demo && (
+              <a
+                href={project.demo}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center px-4 py-2 bg-violet-600 hover:bg-violet-700 text-white rounded-lg transition-colors duration-300 hover:shadow-lg hover:shadow-violet-600/25"
+              >
+                <ExternalLink className="h-4 w-4 mr-2" />
+                <span>Website Link</span>
+              </a>
+            )}
+          </div>
+        </div>
+      </div>
+
+      {/* Glowing effect on hover */}
+      <motion.div
+        className="absolute inset-0 pointer-events-none rounded-xl"
         initial={{ opacity: 0 }}
         animate={{ opacity: isHovered ? 1 : 0 }}
         transition={{ duration: 0.3 }}
