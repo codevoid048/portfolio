@@ -44,11 +44,23 @@ export default function Navbar() {
 
   const handleNavigation = (sectionId: string) => {
     setActiveSection(sectionId)
-    const element = document.getElementById(sectionId)
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" })
-    }
-    setIsOpen(false)
+    setIsOpen(false) // Close mobile menu first
+    
+    // Small delay to ensure menu closes before scrolling
+    setTimeout(() => {
+      const element = document.getElementById(sectionId)
+      if (element) {
+        // Calculate offset for fixed navbar
+        const offset = 80 // Account for navbar height
+        const elementPosition = element.getBoundingClientRect().top
+        const offsetPosition = elementPosition + window.pageYOffset - offset
+
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: "smooth"
+        })
+      }
+    }, 100)
   }
 
   return (
@@ -75,7 +87,6 @@ export default function Navbar() {
                   alt="William Keri"
                   width={56}
                   height={64}
-                  className="rounded-full"
                 />
               </div>
 
@@ -105,11 +116,12 @@ export default function Navbar() {
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.6 }}
-        className={`fixed top-0 left-0 w-full z-50 md:hidden transition-all duration-300 ${
+        className={`fixed top-0 left-0 w-full z-[9999] md:hidden transition-all duration-300 ${
           scrolled
             ? "bg-black/80 backdrop-blur-lg border-b border-white/10"
             : "bg-transparent"
         }`}
+        style={{ zIndex: 9999 }}
       >
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between h-16">
@@ -175,12 +187,23 @@ export default function Navbar() {
                       initial={{ scale: 0, opacity: 0 }}
                       animate={{ scale: 1, opacity: 1 }}
                       transition={{ duration: 0.3, delay: index * 0.05, type: "spring", bounce: 0.4 }}
-                      onClick={() => handleNavigation(item.id)}
-                      className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
+                      onClick={(e) => {
+                        e.preventDefault()
+                        e.stopPropagation()
+                        console.log('Mobile nav item clicked:', item.id) // Debug log
+                        handleNavigation(item.id)
+                      }}
+                      onTouchEnd={(e) => {
+                        e.preventDefault()
+                        console.log('Mobile nav item touched:', item.id) // Debug log
+                        handleNavigation(item.id)
+                      }}
+                      className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 cursor-pointer touch-manipulation ${
                         activeSection === item.id
                           ? "bg-gradient-to-r from-violet-600/40 to-purple-600/40 text-white border border-violet-400/50 shadow-lg shadow-violet-600/25"
                           : "bg-white/10 text-gray-300 hover:bg-white/20 hover:text-white border border-white/20 backdrop-blur-sm"
                       }`}
+                      style={{ touchAction: 'manipulation' }}
                     >
                       <span>{item.label}</span>
                     </motion.button>
