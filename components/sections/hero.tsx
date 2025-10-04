@@ -3,7 +3,7 @@ import type React from "react"
 import { useEffect, useRef } from "react"
 import { motion } from "framer-motion"
 import { Github, Linkedin, Download, Mail, Twitter } from "lucide-react"
-import ParticleBackground from "@/components/ui/particle-background"
+import Galaxy from "@/components/ui/galaxy"
 
 export default function Hero() {
   const containerRef = useRef<HTMLDivElement>(null)
@@ -13,7 +13,21 @@ export default function Hero() {
       ref={containerRef}
       className="relative pt-32 md:pt-48 pb-16 md:pb-24 flex items-center justify-center overflow-hidden"
     >
-      <ParticleBackground />
+      <div style={{ width: '100%', height: '100%', position: 'absolute', top: 0, left: 0 }}>
+        <Galaxy 
+          mouseRepulsion={true}
+          mouseInteraction={true}
+          density={1.5}
+          glowIntensity={0.6}
+          saturation={0.8}
+          hueShift={280}
+          twinkleIntensity={0.4}
+          rotationSpeed={0.05}
+          repulsionStrength={3}
+          speed={1.2}
+          transparent={true}
+        />
+      </div>
 
       <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black z-10"></div>
 
