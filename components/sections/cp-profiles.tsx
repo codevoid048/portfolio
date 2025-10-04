@@ -2,7 +2,6 @@ import { useEffect, useState } from "react"
 import { motion } from "framer-motion"
 import Image from "next/image"
 import { Trophy, Star, Code, Hash } from "lucide-react"
-import { AnimatedBackground } from "@/components/ui/animated-background"
 import { useProfileWebSocket } from "@/hooks/useProfileWebSocket"
 
 export default function CPProfiles() {
@@ -96,8 +95,9 @@ export default function CPProfiles() {
 
     if (!data) {
         return (
-            <section id="cp-profiles" className="py-20 bg-black relative overflow-hidden min-h-[400px]">
-            <AnimatedBackground />
+            <section id="cp-profiles" className="py-20 relative overflow-hidden min-h-[400px]">
+              {/* Subtle background overlay for better readability */}
+              <div className="absolute inset-0 bg-black/20"></div>
             <div className="container mx-auto px-4 relative z-10">
                 <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">
                 <span className="bg-clip-text text-transparent bg-gradient-to-r from-violet-400 to-purple-600">
@@ -112,8 +112,9 @@ export default function CPProfiles() {
         }
 
     return (
-        <section id="cp-profiles" className="py-20 bg-black relative overflow-hidden">
-            <AnimatedBackground />
+        <section id="cp-profiles" className="py-20 relative overflow-hidden">
+          {/* Subtle background overlay for better readability */}
+          <div className="absolute inset-0 bg-black/20"></div>
             <div className="container mx-auto px-4 relative z-10">
                 <motion.div
                     className="animate-on-scroll"

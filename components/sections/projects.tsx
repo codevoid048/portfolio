@@ -4,7 +4,6 @@ import Image from "next/image"
 import { motion, AnimatePresence } from "framer-motion"
 import { ExternalLink, Github } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
-import { AnimatedBackground } from "@/components/ui/animated-background"
 
 export default function Projects() {
   const [activeTab, setActiveTab] = useState<"personal" | "freelance">("personal")
@@ -50,9 +49,9 @@ export default function Projects() {
   ]
 
   return (
-    <section id="projects" className="py-20 bg-gray-900/50 relative overflow-hidden">
-      {/* Animated background */}
-      <AnimatedBackground />
+    <section id="projects" className="py-20 relative overflow-hidden">
+      {/* Subtle background overlay for better readability */}
+      <div className="absolute inset-0 bg-black/20"></div>
 
       <div className="container mx-auto px-4 relative z-10">
         <motion.div

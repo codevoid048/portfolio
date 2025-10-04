@@ -13,9 +13,9 @@ export default function Skills() {
   const allSkills = Object.values(skillCategories).flat()
 
   return (
-    <section id="skills" className="py-20 bg-black relative overflow-hidden">
-      {/* Animated background elements */}
-      <FloatingGradients />
+    <section id="skills" className="py-20 relative overflow-hidden">
+      {/* Subtle background overlay for better readability */}
+      <div className="absolute inset-0 bg-black/20" />
 
       <div className="container mx-auto px-4">
         <motion.div
@@ -32,7 +32,7 @@ export default function Skills() {
           </h2>
 
           <div className="max-w-4xl mx-auto">
-            <div className="flex flex-wrap justify-center gap-1 md:gap-1">
+            <div className="flex flex-wrap justify-center gap-0">
               {allSkills.map((skill, index) => (
                 <SkillPill key={index} skill={skill} delay={index * 0.05} />
               ))}
@@ -112,45 +112,5 @@ function SkillPill({ skill, delay }: { skill: string; delay: number }) {
              style={{ transform: "translateZ(-12px)" }} />
       </div>
     </motion.div>
-  )
-}
-
-// Animated background component for visual interest
-function FloatingGradients() {
-  return (
-    <>
-      {/* Top gradient fade */}
-      <div className="absolute top-0 left-0 w-full h-20 bg-gradient-to-b from-gray-900 to-transparent"></div>
-
-      {/* Bottom gradient fade */}
-      <div className="absolute bottom-0 left-0 w-full h-20 bg-gradient-to-t from-gray-900 to-transparent"></div>
-
-      {/* Animated gradient orbs */}
-      <motion.div
-        className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full bg-violet-900/10 blur-[100px]"
-        animate={{
-          x: [0, 30, 0],
-          y: [0, -30, 0],
-        }}
-        transition={{
-          duration: 15,
-          repeat: Number.POSITIVE_INFINITY,
-          repeatType: "reverse",
-        }}
-      />
-
-      <motion.div
-        className="absolute bottom-1/4 right-1/4 w-96 h-96 rounded-full bg-purple-900/10 blur-[100px]"
-        animate={{
-          x: [0, -30, 0],
-          y: [0, 30, 0],
-        }}
-        transition={{
-          duration: 18,
-          repeat: Number.POSITIVE_INFINITY,
-          repeatType: "reverse",
-        }}
-      />
-    </>
   )
 }

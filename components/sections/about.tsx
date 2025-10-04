@@ -10,9 +10,9 @@ export default function About() {
   const [activeTab, setActiveTab] = useState<"about" | "resume">("about")
 
   return (
-    <section id="about" className="py-20 bg-gray-900/50 relative overflow-hidden">
-      {/* Background gradient */}
-      <div className="absolute inset-0 bg-gradient-radial from-violet-900/20 to-transparent opacity-30"></div>
+    <section id="about" className="py-20 relative overflow-hidden">
+      {/* Subtle background overlay for better readability */}
+      <div className="absolute inset-0 bg-black/20"></div>
 
       <div className="container mx-auto px-4">
         <motion.div

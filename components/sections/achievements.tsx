@@ -2,7 +2,6 @@ import type React from "react"
 
 import { motion } from "framer-motion"
 import { Award, BookOpen, Briefcase, GraduationCap } from "lucide-react"
-import { AnimatedBackground } from "@/components/ui/animated-background"
 
 export default function Achievements() {
   const achievements = [
@@ -45,9 +44,9 @@ export default function Achievements() {
   ]
 
   return (
-    <section id="achievements" className="py-20 bg-black relative overflow-hidden">
-      {/* Animated background */}
-      <AnimatedBackground />
+    <section id="achievements" className="py-20 relative overflow-hidden">
+      {/* Subtle background overlay for better readability */}
+      <div className="absolute inset-0 bg-black/20"></div>
 
       <div className="container mx-auto px-4 relative z-10">
         <motion.div

@@ -13,6 +13,7 @@ import Footer from "@/components/sections/footer"
 import { Button } from "@/components/ui/button"
 import { ArrowUp } from "lucide-react"
 import Navbar from "@/components/sections/navbar"
+import Galaxy from "@/components/ui/galaxy"
 
 export default function Home() {
   const { scrollY } = useScroll()
@@ -48,16 +49,39 @@ export default function Home() {
   }, [])
 
   return (
-    <main className="relative bg-gradient-to-b from-black to-gray-900 text-white min-h-screen">
-      <Navbar />
-      <Hero />
-      <About />
-      <Skills />
-      <Projects />
-      <CPProfiles />
-      <Achievements />
-      <Contact />
-      <Footer />
+    <main className="relative text-white min-h-screen">
+      {/* Galaxy background for entire page */}
+      <div className="fixed inset-0 w-full h-full z-0">
+        <Galaxy 
+          mouseRepulsion={true}
+          mouseInteraction={true}
+          density={1.2}
+          glowIntensity={0.4}
+          saturation={0.7}
+          hueShift={280}
+          twinkleIntensity={0.3}
+          rotationSpeed={0.03}
+          repulsionStrength={2}
+          speed={1.0}
+          transparent={true}
+        />
+      </div>
+      
+      {/* Dark overlay to ensure readability */}
+      <div className="fixed inset-0 bg-black/30 z-10" />
+      
+      {/* Content */}
+      <div className="relative z-20">
+        <Navbar />
+        <Hero />
+        <About />
+        <Skills />
+        <Projects />
+        <CPProfiles />
+        <Achievements />
+        <Contact />
+        <Footer />
+      </div>
 
       <motion.div ref={scrollToTopRef} style={{ opacity }} className="fixed bottom-8 right-8 z-50">
         <Button

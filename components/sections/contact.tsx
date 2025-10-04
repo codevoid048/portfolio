@@ -6,7 +6,6 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Send, Mail, Github, Linkedin, MapPin, PhoneCall } from "lucide-react"
-import { AnimatedBackground } from "@/components/ui/animated-background"
 import emailjs from "@emailjs/browser"
 
 export default function Contact() {
@@ -55,9 +54,9 @@ export default function Contact() {
   }
 
   return (
-    <section id="contact" className="py-20 bg-gray-900/50 relative overflow-hidden">
-      {/* Animated background */}
-      <AnimatedBackground />
+    <section id="contact" className="py-20 relative overflow-hidden">
+      {/* Subtle background overlay for better readability */}
+      <div className="absolute inset-0 bg-black/20"></div>
 
       <div className="container mx-auto px-4 relative z-10">
         <motion.div

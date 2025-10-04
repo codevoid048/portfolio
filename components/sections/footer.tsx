@@ -10,7 +10,9 @@ export default function Footer() {
   }, [])
 
   return (
-    <footer className="py-8 bg-black border-t border-gray-800 relative overflow-hidden">
+    <footer className="py-8 border-t border-gray-800 relative overflow-hidden">
+      {/* Subtle background overlay for better readability */}
+      <div className="absolute inset-0 bg-black/30"></div>
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row items-center justify-center">
           <motion.div
