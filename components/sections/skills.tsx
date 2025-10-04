@@ -1,39 +1,16 @@
 import { motion } from "framer-motion"
-import Image from "next/image"
 
 export default function Skills() {
-  // Combine all skills into a single array without categories
-  const skills = [
-    // Frontend
-    { name: "React", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg" },
-    { name: "Next.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg" },
-    { name: "TypeScript", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg" },
-    { name: "JavaScript", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg" },
-    { name: "HTML5", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg" },
-    { name: "CSS3", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/css3/css3-original.svg" },
-    { name: "Tailwind CSS", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg" },
-    { name: "Cpp", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/cplusplus/cplusplus-original.svg" },
-    { name: "Framer Motion", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/framermotion/framermotion-original.svg" },
-    // Backend
-    { name: "Node.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original-wordmark.svg" },
-    { name: "Express", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/express/express-original-wordmark.svg" },
-    { name: "FastAPI", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/fastapi/fastapi-original.svg" },
-    //{ name: "Python", icon: "/placeholder.svg?height=60&width=60" },
-    //{ name: "Django", icon: "/placeholder.svg?height=60&width=60" },
-    { name: "GraphQL", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/graphql/graphql-plain.svg" },
-    //{ name: "REST APIs", icon: "/placeholder.svg?height=60&width=60" },
-    // Database
-    { name: "MongoDB", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mongodb/mongodb-original.svg" },
-    { name: "PostgreSQL", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg" },
-    { name: "MySQL", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mysql/mysql-original.svg" },
-    //{ name: "Firebase", icon: "/placeholder.svg?height=60&width=60" },
-    // DevOps & Tools
-    { name: "Git", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg" },
-    { name: "Docker", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg" },
-    //{ name: "AWS", icon: "/placeholder.svg?height=60&width=60" },
-    //{ name: "Figma", icon: "/placeholder.svg?height=60&width=60" },
-    //{ name: "VS Code", icon: "/placeholder.svg?height=60&width=60" },
-  ]
+  // Skills organized by category for better bento layout
+  const skillCategories = {
+    languages: ["C", "C++", "Python", "Java", "JavaScript", "TypeScript"],
+    technologies: ["React", "Next.js", "Express.js", "Node.js", "FastAPI", "LangChain", "LlamaIndex", "FAISS"],
+    databases: ["MongoDB", "MySQL", "PostgreSQL", "Redis", "ChromaDB"],
+    tools: ["Git", "Docker", "Linux", "AWS Lambda", "AWS S3", "CloudWatch", "CloudFormation", "Cloudflare"]
+  }
+
+  // Flatten all skills for the layout
+  const allSkills = Object.values(skillCategories).flat()
 
   return (
     <section id="skills" className="py-20 bg-black relative overflow-hidden">
@@ -54,10 +31,12 @@ export default function Skills() {
             </span>
           </h2>
 
-          <div className="grid grid-cols-5 sm:grid-cols-6 md:grid-cols-8 lg:grid-cols-10 gap-4 justify-items-center">
-            {skills.map((skill, index) => (
-              <SkillIcon key={index} skill={skill} delay={index * 0.05} />
-            ))}
+          <div className="max-w-4xl mx-auto">
+            <div className="flex flex-wrap justify-center gap-1 md:gap-1">
+              {allSkills.map((skill, index) => (
+                <SkillPill key={index} skill={skill} delay={index * 0.05} />
+              ))}
+            </div>
           </div>
         </motion.div>
       </div>
@@ -65,43 +44,73 @@ export default function Skills() {
   )
 }
 
-function SkillIcon({ skill, delay }: { skill: { name: string; icon: string }; delay: number }) {
+function SkillPill({ skill, delay }: { skill: string; delay: number }) {
   return (
     <motion.div
-      className="flex flex-col items-center"
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
+      initial={{ opacity: 0, scale: 0.8, y: 20, rotateX: -15 }}
+      whileInView={{ opacity: 1, scale: 1, y: 0, rotateX: 0 }}
       viewport={{ once: true }}
-      transition={{ duration: 0.5, delay }}
+      transition={{ 
+        duration: 0.7, 
+        delay,
+        type: "spring",
+        bounce: 0.2
+      }}
+      whileHover={{ 
+        y: -12,
+        rotateX: 10,
+        rotateY: 5,
+        scale: 1.1,
+        z: 50
+      }}
+      className="group cursor-pointer"
+      style={{ 
+        transformStyle: "preserve-3d",
+        perspective: "1000px"
+      }}
     >
-      <motion.div
-        className="relative w-16 h-16 mb-2 bg-gray-800/50 rounded-xl p-2 flex items-center justify-center group"
-        whileHover={{
-          y: -5,
-          boxShadow: "0 0 20px rgba(139, 92, 246, 0.5)",
-          backgroundColor: "rgba(139, 92, 246, 0.2)",
-        }}
-        transition={{ type: "spring", stiffness: 400, damping: 10 }}
-      >
-        <Image
-          src={skill.icon || "/placeholder.svg"}
-          alt={skill.name}
-          width={40}
-          height={40}
-          className="transition-all duration-300 group-hover:scale-110"
-        />
-        <motion.div
-          className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 bg-gradient-to-tr from-violet-600/20 to-purple-600/20 transition-opacity duration-300"
-          initial={{ opacity: 0 }}
-          whileHover={{ opacity: 1 }}
-        />
-      </motion.div>
-      <motion.p
-        className="text-sm text-gray-400 text-center transition-colors duration-300 group-hover:text-violet-400"
-        whileHover={{ color: "rgb(167, 139, 250)" }}
-      >
-        {skill.name}
-      </motion.p>
+      <div className="relative px-4 py-2 transition-all duration-500" 
+           style={{ 
+             transformStyle: "preserve-3d"
+           }}>
+        
+        
+        
+        
+        {/* 3D Top Surface */}
+        <div className="relative bg-gradient-to-br from-gray-700/90 to-gray-800/90 backdrop-blur-xl border border-gray-500/40 rounded-3xl shadow-2xl group-hover:from-violet-800/80 group-hover:to-purple-800/80 group-hover:border-violet-400/60 transition-all duration-500"
+             style={{ 
+               transform: "translateZ(0px)",
+               boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.1)"
+             }}>
+          
+          {/* 3D Highlight Edge - Top */}
+          <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/30 to-transparent rounded-t-3xl" />
+          
+          {/* 3D Highlight Edge - Left */}
+          <div className="absolute inset-y-0 left-0 w-px bg-gradient-to-b from-transparent via-white/20 to-transparent rounded-l-3xl" />
+          
+          {/* 3D Inner Glow */}
+          <div className="absolute inset-1 rounded-2xl bg-gradient-to-br from-white/10 via-transparent to-violet-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+          
+          {/* 3D Depth Shadow */}
+          <div className="absolute inset-0 rounded-3xl shadow-inner" 
+               style={{ 
+                 boxShadow: "inset 0 2px 4px rgba(0, 0, 0, 0.3), inset 0 -1px 2px rgba(255, 255, 255, 0.1)"
+               }} />
+          
+          {/* Main Content */}
+          <div className="relative px-4 py-2" style={{ transform: "translateZ(2px)" }}>
+            <span className="relative text-sm md:text-base font-bold text-gray-100 group-hover:text-white transition-all duration-300 tracking-wide drop-shadow-lg">
+              {skill}
+            </span>
+          </div>
+        </div>
+        
+        {/* 3D Glow Effect */}
+        <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-violet-500/0 to-purple-500/0 group-hover:from-violet-500/40 group-hover:to-purple-500/40 blur-xl opacity-0 group-hover:opacity-100 transition-all duration-500 -z-10" 
+             style={{ transform: "translateZ(-12px)" }} />
+      </div>
     </motion.div>
   )
 }

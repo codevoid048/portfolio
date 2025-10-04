@@ -189,7 +189,7 @@ function ResumeContent() {
             >
               <a href={resumeUrl} target="_blank" rel="noopener noreferrer">
                 <ExternalLink className="mr-2 h-4 w-4" />
-                Open in New Tab
+                New Tab
               </a>
             </Button>
 
@@ -200,7 +200,7 @@ function ResumeContent() {
             >
               <a href={resumeUrl} download="William_Keri_Resume.pdf">
                 <Download className="mr-2 h-4 w-4" />
-                Download PDF
+                Download
               </a>
             </Button>
           </div>
