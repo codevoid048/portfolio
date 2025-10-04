@@ -2,13 +2,14 @@ import type React from "react"
 
 import { motion } from "framer-motion"
 import { Award, BookOpen, Briefcase, GraduationCap } from "lucide-react"
+import ElectricBorder from "@/components/ui/electric-border"
 
 export default function Achievements() {
   const achievements = [
     {
       title: "Freelance Full Stack Developer",
       date: "July 2025 - Present",
-      description: "Providing end-to-end freelance services including frontend design, backend development, and deployment for diverse client projects",
+      description: "Providing end-to-end freelance services including design to deployment",
       icon: <Briefcase className="h-6 w-6" />,
     },
     {
@@ -62,13 +63,14 @@ export default function Achievements() {
             </span>
           </h2>
 
-          <div className="relative max-w-4xl mx-auto">
-            {/* Timeline line */}
-            <div className="absolute left-0 md:left-1/2 top-0 h-full w-0.5 bg-gradient-to-b from-violet-600/80 via-purple-600/80 to-violet-600/80 transform md:-translate-x-1/2"></div>
-
-            <div className="space-y-12">
+          <div className="max-w-6xl mx-auto">
+            <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4">
               {achievements.map((achievement, index) => (
-                <TimelineItem key={index} achievement={achievement} index={index} isLeft={index % 2 === 0} />
+                <AchievementCard 
+                  key={index} 
+                  achievement={achievement} 
+                  index={index} 
+                />
               ))}
             </div>
           </div>
@@ -78,10 +80,9 @@ export default function Achievements() {
   )
 }
 
-function TimelineItem({
+function AchievementCard({
   achievement,
   index,
-  isLeft,
 }: {
   achievement: {
     title: string
@@ -90,32 +91,60 @@ function TimelineItem({
     icon: React.ReactNode
   }
   index: number
-  isLeft: boolean
 }) {
   return (
     <motion.div
-      className={`relative flex flex-col md:flex-row ${isLeft ? "md:flex-row-reverse" : ""}`}
-      initial={{ opacity: 0, x: isLeft ? -50 : 50 }}
-      whileInView={{ opacity: 1, x: 0 }}
+      initial={{ opacity: 0, y: 30, scale: 0.9 }}
+      whileInView={{ opacity: 1, y: 0, scale: 1 }}
       viewport={{ once: true }}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
+      transition={{ 
+        duration: 0.5, 
+        delay: index * 0.1,
+        type: "spring",
+        bounce: 0.2
+      }}
+      whileHover={{ 
+        y: -8,
+        scale: 1.02,
+        transition: { duration: 0.2 }
+      }}
+      className="group cursor-pointer"
     >
-      {/* Timeline dot */}
-      <div className="absolute left-0 md:left-1/2 top-0 w-6 h-6 rounded-full bg-violet-600 shadow-[0_0_10px_rgba(139,92,246,0.8)] transform -translate-x-1/2 z-10"></div>
-
-      {/* Content */}
-      <div className={`md:w-1/2 pl-10 md:pl-0 ${isLeft ? "md:pr-12" : "md:pl-12"}`}>
-        <div className="bg-gray-900/50 backdrop-blur-sm rounded-xl p-6 border border-gray-800 hover:border-violet-700/50 transition-all duration-500 hover:shadow-[0_0_20px_rgba(139,92,246,0.2)]">
-          <div className="flex items-center mb-3">
-            <div className="p-2 bg-violet-700/20 rounded-lg mr-3">{achievement.icon}</div>
-            <h3 className="text-xl font-semibold text-white">{achievement.title}</h3>
+      <ElectricBorder
+        color="#8b5cf6"
+        speed={0.8}
+        chaos={0.3}
+        thickness={2}
+        style={{ borderRadius: 16 }}
+        className="h-full"
+      >
+        <div className="bg-gray-900/80 backdrop-blur-sm rounded-2xl p-4 md:p-6 h-full relative overflow-hidden">
+        {/* Icon and Title */}
+        <div className="flex items-start gap-3 mb-3">
+          <div className="p-2 bg-violet-700/20 rounded-xl group-hover:bg-violet-700/30 transition-colors duration-300 flex-shrink-0">
+            {achievement.icon}
           </div>
-
-          <div className="mb-2 text-violet-400 font-medium">{achievement.date}</div>
-
-          <p className="text-gray-300">{achievement.description}</p>
+          <div className="flex-1 min-w-0">
+            <h3 className="text-base md:text-lg font-semibold text-white leading-tight group-hover:text-violet-200 transition-colors duration-300">
+              {achievement.title}
+            </h3>
+          </div>
         </div>
-      </div>
+
+        {/* Date */}
+        <div className="mb-3 text-sm text-violet-400 font-medium">
+          {achievement.date}
+        </div>
+
+        {/* Description - Hidden on small screens, shown on medium+ */}
+        <p className="text-gray-300 text-sm leading-relaxed hidden md:block group-hover:text-gray-200 transition-colors duration-300">
+          {achievement.description}
+        </p>
+
+          {/* Hover effect gradient */}
+          <div className="absolute inset-0 bg-gradient-to-br from-violet-600/0 to-purple-600/0 group-hover:from-violet-600/5 group-hover:to-purple-600/5 rounded-2xl transition-all duration-500 pointer-events-none" />
+        </div>
+      </ElectricBorder>
     </motion.div>
   )
 }
