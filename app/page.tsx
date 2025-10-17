@@ -13,7 +13,6 @@ import Footer from "@/components/sections/footer"
 import { Button } from "@/components/ui/button"
 import { ArrowUp } from "lucide-react"
 import Navbar from "@/components/sections/navbar"
-import ResponsiveGalaxy from "@/components/ui/responsive-galaxy"
 
 export default function Home() {
   const { scrollY } = useScroll()
@@ -50,13 +49,8 @@ export default function Home() {
 
   return (
     <main className="relative text-white min-h-screen">
-      {/* Responsive Galaxy background for entire page */}
-      <div className="fixed inset-0 w-full h-full z-0">
-        <ResponsiveGalaxy />
-      </div>
-      
-      {/* Dark overlay to ensure readability */}
-      <div className="fixed inset-0 bg-black/30 z-10" />
+      {/* Black Background */}
+      <div className="fixed inset-0 bg-black/90 z-0"></div>
       
       {/* Content */}
       <div className="relative z-20">
