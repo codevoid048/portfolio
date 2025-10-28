@@ -110,14 +110,14 @@ function AchievementCard({
       }}
       className="group cursor-pointer"
     >
-      <ElectricBorder
+      {/* <ElectricBorder
         color="#8b5cf6"
         speed={0.8}
         chaos={0.3}
         thickness={2}
         style={{ borderRadius: 16 }}
         className="h-full"
-      >
+      > */}
         <div className="bg-gray-900/80 backdrop-blur-sm rounded-2xl p-4 md:p-6 h-full relative overflow-hidden">
         {/* Icon and Title */}
         <div className="flex items-start gap-3 mb-3">
@@ -144,7 +144,7 @@ function AchievementCard({
           {/* Hover effect gradient */}
           <div className="absolute inset-0 bg-gradient-to-br from-violet-600/0 to-purple-600/0 group-hover:from-violet-600/5 group-hover:to-purple-600/5 rounded-2xl transition-all duration-500 pointer-events-none" />
         </div>
-      </ElectricBorder>
+      {/* </ElectricBorder> */}
     </motion.div>
   )
 }
