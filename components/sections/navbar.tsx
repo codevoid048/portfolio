@@ -1,7 +1,7 @@
 "use client"
 
-import { useState, useEffect } from "react"
-import { motion } from "framer-motion"
+import { useState, useEffect, useRef } from "react"
+import { motion, AnimatePresence } from "framer-motion"
 import { User, Code, Briefcase, Mail, Folder, Sun, Moon } from "lucide-react"
 import { useTheme } from "next-themes"
 
@@ -9,6 +9,10 @@ export default function Navbar() {
   const [activeSection, setActiveSection] = useState("about")
   const [scrolled, setScrolled] = useState(false)
   const [isOpen, setIsOpen] = useState(false)
+  const [isAnimating, setIsAnimating] = useState(false)
+  const [animationOrigin, setAnimationOrigin] = useState({ x: 0, y: 0 })
+  const desktopThemeButtonRef = useRef<HTMLButtonElement>(null)
+  const mobileThemeButtonRef = useRef<HTMLButtonElement>(null)
   const { theme, setTheme } = useTheme()
 
   const navItems = [
@@ -62,11 +66,68 @@ export default function Navbar() {
   }
 
   const toggleTheme = () => {
-    setTheme(theme === "dark" ? "light" : "dark")
+    // Determine which button is currently visible and get its position
+    const currentButtonRef = window.innerWidth >= 768 ? desktopThemeButtonRef : mobileThemeButtonRef
+    const buttonElement = currentButtonRef.current
+
+    if (buttonElement) {
+      const rect = buttonElement.getBoundingClientRect()
+      setAnimationOrigin({
+        x: rect.left + rect.width / 2,
+        y: rect.top + rect.height / 2
+      })
+      setIsAnimating(true)
+
+      // Change theme after animation starts
+      setTimeout(() => {
+        setTheme(theme === "dark" ? "light" : "dark")
+      }, 300)
+
+      // Reset animation state
+      setTimeout(() => {
+        setIsAnimating(false)
+      }, 1400)
+    }
   }
 
   return (
     <>
+      {/* Theme Transition Overlay */}
+      <AnimatePresence>
+        {isAnimating && (
+          <motion.div
+            initial={{
+              position: "fixed",
+              top: animationOrigin.y,
+              left: animationOrigin.x,
+              width: 0,
+              height: 0,
+              borderRadius: "50%",
+              backgroundColor: theme === "dark" ? "#ffffff" : "#000000",
+              zIndex: 9999,
+              opacity: 0.8
+            }}
+            animate={{
+              width: Math.max(window.innerWidth, window.innerHeight) * 2,
+              height: Math.max(window.innerWidth, window.innerHeight) * 2,
+              top: animationOrigin.y - Math.max(window.innerWidth, window.innerHeight),
+              left: animationOrigin.x - Math.max(window.innerWidth, window.innerHeight),
+              opacity: 0
+            }}
+            exit={{
+              opacity: 0,
+              scale: 0
+            }}
+            transition={{
+              duration: 1.2,
+              ease: "easeInOut"
+            }}
+            style={{
+              transformOrigin: "center"
+            }}
+          />
+        )}
+      </AnimatePresence>
       {/* Desktop Floating Navbar */}
       <div className="fixed top-3 left-0 right-0 z-50 hidden md:block">
         <div className="flex justify-center">
@@ -91,6 +152,7 @@ export default function Navbar() {
                       />
                     ))}
                     <button
+                      ref={desktopThemeButtonRef}
                       onClick={toggleTheme}
                       aria-label="Toggle theme"
                       className="ml-2 inline-flex items-center justify-center rounded-full border border-border bg-accent hover:bg-accent/80 text-foreground transition-colors h-8 w-8"
@@ -132,6 +194,7 @@ export default function Navbar() {
             {/* Theme toggle (mobile) */}
             <li>
               <button
+                ref={mobileThemeButtonRef}
                 onClick={toggleTheme}
                 aria-label="Toggle theme"
                 className="w-full py-3 flex flex-col items-center gap-1 text-xs text-muted-foreground hover:text-foreground transition-colors"
