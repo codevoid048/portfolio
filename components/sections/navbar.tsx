@@ -1,21 +1,21 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { motion, AnimatePresence } from "framer-motion"
-import { Menu, X, Home, User, Code, Trophy, Briefcase, Mail } from "lucide-react"
-import Image from "next/image"
+import { motion } from "framer-motion"
+import { User, Code, Briefcase, Mail, Folder, Sun, Moon } from "lucide-react"
+import { useTheme } from "next-themes"
 
 export default function Navbar() {
-  const [activeSection, setActiveSection] = useState("home")
+  const [activeSection, setActiveSection] = useState("about")
   const [scrolled, setScrolled] = useState(false)
   const [isOpen, setIsOpen] = useState(false)
+  const { theme, setTheme } = useTheme()
 
   const navItems = [
     { id: "about", label: "About", icon: User },
     { id: "skills", label: "Skills", icon: Code },
-    { id: "projects", label: "Projects", icon: Briefcase },
-    { id: "cp-profiles", label: "CP", icon: Trophy },
-    { id: "achievements", label: "Achievements", icon: Trophy },
+    { id: "projects", label: "Projects", icon: Folder },
+    { id: "work", label: "Work", icon: Briefcase },
     { id: "contact", label: "Contact", icon: Mail },
   ]
 
@@ -44,23 +44,25 @@ export default function Navbar() {
 
   const handleNavigation = (sectionId: string) => {
     setActiveSection(sectionId)
-    setIsOpen(false) // Close mobile menu first
-    
-    // Small delay to ensure menu closes before scrolling
+    setIsOpen(false)
+
     setTimeout(() => {
       const element = document.getElementById(sectionId)
       if (element) {
-        // Calculate offset for fixed navbar
-        const offset = 80 // Account for navbar height
+        const offset = 80
         const elementPosition = element.getBoundingClientRect().top
         const offsetPosition = elementPosition + window.pageYOffset - offset
 
         window.scrollTo({
           top: offsetPosition,
-          behavior: "smooth"
+          behavior: "smooth",
         })
       }
     }, 100)
+  }
+
+  const toggleTheme = () => {
+    setTheme(theme === "dark" ? "light" : "dark")
   }
 
   return (
@@ -72,148 +74,75 @@ export default function Navbar() {
             initial={{ y: -100, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className={`transition-all duration-500 ${
-              scrolled ? "scale-95" : "scale-100"
-            }`}
+            className={`transition-all duration-500 ${scrolled ? "scale-95" : "scale-100"}`}
           >
-        <div className="relative">
-          {/* Glassmorphism container */}
-          <div className="bg-black/10 backdrop-blur-lg border border-white/20 rounded-full px-6 py-3 shadow-2xl w-[600px] md:w-[700px] lg:w-[850px] xl:w-[1024px]">
-            <div className="flex items-center justify-between px-4">
-              {/* Logo */}
-              <div className="flex items-center">
-                <Image
-                  src="/logo1.jpg"
-                  alt="William Keri"
-                  width={56}
-                  height={64}
-                />
+            <div className="relative">
+              {/* Glassmorphism container */}
+              <div className="bg-background/80 backdrop-blur-lg border border-border rounded-full px-6 py-3 shadow-2xl w-[600px] md:w-[700px] lg:w-[850px] xl:w-[1024px]">
+                <div className="flex items-center justify-center px-4 gap-2">
+                  {/* Navigation Items + Theme Toggle */}
+                  <div className="flex items-center space-x-1">
+                    {navItems.map((item) => (
+                      <NavItem
+                        key={item.id}
+                        item={item}
+                        isActive={activeSection === item.id}
+                        onClick={() => handleNavigation(item.id)}
+                      />
+                    ))}
+                    <button
+                      onClick={toggleTheme}
+                      aria-label="Toggle theme"
+                      className="ml-2 inline-flex items-center justify-center rounded-full border border-border bg-accent hover:bg-accent/80 text-foreground transition-colors h-8 w-8"
+                    >
+                      {theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+                    </button>
+                  </div>
+                </div>
               </div>
 
-              {/* Navigation Items */}
-              <div className="flex items-center space-x-1">
-                {navItems.map((item) => (
-                  <NavItem
-                    key={item.id}
-                    item={item}
-                    isActive={activeSection === item.id}
-                    onClick={() => handleNavigation(item.id)}
-                  />
-                ))}
-              </div>
+              {/* Glow effect */}
+              <div className="absolute inset-0 bg-foreground/10 rounded-full blur-xl -z-10 opacity-40" />
             </div>
-          </div>
-
-          {/* Glow effect */}
-          <div className="absolute inset-0 bg-gradient-to-r from-violet-600/20 to-purple-600/20 rounded-full blur-xl -z-10 opacity-60" />
-        </div>
-      </motion.nav>
+          </motion.nav>
         </div>
       </div>
 
-      {/* Mobile Navbar */}
-      <motion.header
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        transition={{ duration: 0.6 }}
-        className={`fixed top-0 left-0 w-full z-[9999] md:hidden transition-all duration-300 ${
-          scrolled
-            ? "bg-black/80 backdrop-blur-lg border-b border-white/10"
-            : "bg-transparent"
-        }`}
-        style={{ zIndex: 9999 }}
-      >
-        <div className="container mx-auto px-4">
-          <div className="flex items-center justify-between h-16">
-            {/* Mobile Logo */}
-            <div className="flex items-center space-x-3">
-              <Image
-                src="/logo1.jpg"
-                alt="William Keri"
-                width={48}
-                height={48}
-              />
-            </div>
-
-            {/* Mobile Menu Button */}
-            <motion.button
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-              onClick={() => setIsOpen(!isOpen)}
-              className="p-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white hover:bg-white/20 transition-all duration-300"
-            >
-              <AnimatePresence mode="wait">
-                {isOpen ? (
-                  <motion.div
-                    key="close"
-                    initial={{ rotate: -90, opacity: 0 }}
-                    animate={{ rotate: 0, opacity: 1 }}
-                    exit={{ rotate: 90, opacity: 0 }}
-                    transition={{ duration: 0.2 }}
+      {/* Mobile Bottom Navbar */}
+      <div className="md:hidden fixed inset-x-0 bottom-4 z-[9999] flex justify-center">
+        <nav className="mx-4 w-full max-w-sm rounded-full bg-background/80 backdrop-blur-lg border border-border shadow-xl">
+          <ul className="grid grid-cols-6">
+            {navItems.map((item) => {
+              const Icon = item.icon
+              const active = activeSection === item.id
+              return (
+                <li key={item.id}>
+                  <button
+                    onClick={() => handleNavigation(item.id)}
+                    className={`w-full py-3 flex flex-col items-center gap-1 text-xs transition-colors ${
+                      active ? "text-foreground" : "text-muted-foreground hover:text-foreground"
+                    }`}
                   >
-                    <X className="h-5 w-5" />
-                  </motion.div>
-                ) : (
-                  <motion.div
-                    key="menu"
-                    initial={{ rotate: 90, opacity: 0 }}
-                    animate={{ rotate: 0, opacity: 1 }}
-                    exit={{ rotate: -90, opacity: 0 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    <Menu className="h-5 w-5" />
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </motion.button>
-          </div>
-        </div>
-
-        {/* Mobile Menu */}
-        <AnimatePresence>
-          {isOpen && (
-            <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: "auto" }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.3 }}
-              className="overflow-hidden bg-black/90 backdrop-blur-lg border-t border-white/10"
-            >
-              <div className="container mx-auto px-4 py-4">
-                <div className="flex flex-wrap justify-center gap-2">
-                  {navItems.map((item, index) => (
-                    <motion.button
-                      key={item.id}
-                      initial={{ scale: 0, opacity: 0 }}
-                      animate={{ scale: 1, opacity: 1 }}
-                      transition={{ duration: 0.3, delay: index * 0.05, type: "spring", bounce: 0.4 }}
-                      onClick={(e) => {
-                        e.preventDefault()
-                        e.stopPropagation()
-                        console.log('Mobile nav item clicked:', item.id) // Debug log
-                        handleNavigation(item.id)
-                      }}
-                      onTouchEnd={(e) => {
-                        e.preventDefault()
-                        console.log('Mobile nav item touched:', item.id) // Debug log
-                        handleNavigation(item.id)
-                      }}
-                      className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 cursor-pointer touch-manipulation ${
-                        activeSection === item.id
-                          ? "bg-gradient-to-r from-violet-600/40 to-purple-600/40 text-white border border-violet-400/50 shadow-lg shadow-violet-600/25"
-                          : "bg-white/10 text-gray-300 hover:bg-white/20 hover:text-white border border-white/20 backdrop-blur-sm"
-                      }`}
-                      style={{ touchAction: 'manipulation' }}
-                    >
-                      <span>{item.label}</span>
-                    </motion.button>
-                  ))}
-                </div>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </motion.header>
+                    <Icon className={`h-5 w-5 ${active ? "" : "opacity-80"}`} />
+                    <span className="sr-only sm:not-sr-only sm:block">{item.label}</span>
+                  </button>
+                </li>
+              )
+            })}
+            {/* Theme toggle (mobile) */}
+            <li>
+              <button
+                onClick={toggleTheme}
+                aria-label="Toggle theme"
+                className="w-full py-3 flex flex-col items-center gap-1 text-xs text-muted-foreground hover:text-foreground transition-colors"
+              >
+                {theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+                <span className="sr-only sm:not-sr-only sm:block">Theme</span>
+              </button>
+            </li>
+          </ul>
+        </nav>
+      </div>
     </>
   )
 }
@@ -227,7 +156,7 @@ function NavItem({
   isActive: boolean
   onClick: () => void
 }) {
-  // const Icon = item.icon
+  const Icon = item.icon
 
   return (
     <motion.button
@@ -235,19 +164,16 @@ function NavItem({
       whileTap={{ scale: 0.95 }}
       onClick={onClick}
       className={`relative flex items-center space-x-2 px-4 py-2 rounded-full transition-all duration-300 ${
-        isActive
-          ? "text-white bg-violet-600/30 shadow-lg shadow-violet-600/25"
-          : "text-gray-300 hover:text-white hover:bg-white/10"
+        isActive ? "text-foreground bg-accent/60" : "text-muted-foreground hover:text-foreground hover:bg-accent/40"
       }`}
     >
-      {/* <Icon className="h-4 w-4" /> */}
+      <Icon className="h-4 w-4" />
       <span className="text-sm font-medium ">{item.label}</span>
-      
-      {/* Active indicator */}
+
       {isActive && (
         <motion.div
           layoutId="activeIndicator"
-          className="absolute inset-0 bg-gradient-to-r from-violet-600/40 to-purple-600/40 rounded-full -z-10"
+          className="absolute inset-0 bg-accent/60 rounded-full -z-10"
           transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
         />
       )}

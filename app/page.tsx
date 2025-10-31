@@ -2,27 +2,18 @@
 
 import { useEffect, useRef } from "react"
 import { motion, useScroll, useTransform } from "framer-motion"
-import Hero from "@/components/sections/hero"
-import About from "@/components/sections/about"
 import Skills from "@/components/sections/skills"
 import Projects from "@/components/sections/projects"
-import CPProfiles from "@/components/sections/cp-profiles"
-import Achievements from "@/components/sections/achievements"
 import Contact from "@/components/sections/contact"
 import Footer from "@/components/sections/footer"
-import { Button } from "@/components/ui/button"
-import { ArrowUp } from "lucide-react"
+// import { Button } from "@/components/ui/button"
+// import { ArrowUp } from "lucide-react"
 import Navbar from "@/components/sections/navbar"
+import Intro from "@/components/sections/intro"
+import WorkExperience from "@/components/sections/work-experience"
 
 export default function Home() {
-  const { scrollY } = useScroll()
-  const scrollToTopRef = useRef<HTMLDivElement>(null)
-  const opacity = useTransform(scrollY, [0, 200], [0, 1])
-
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" })
-  }
-
+  
   // Intersection Observer for animations
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -48,33 +39,22 @@ export default function Home() {
   }, [])
 
   return (
-    <main className="relative text-white min-h-screen">
-      {/* Black Background */}
-      <div className="fixed inset-0 bg-black/90 z-0"></div>
+    <main className="relative min-h-screen">
+      {/* Background */}
+      <div className="fixed inset-0 bg-background z-0"></div>
       
       {/* Content */}
       <div className="relative z-20">
         <Navbar />
-        <Hero />
-        <About />
+        <Intro />
         <Skills />
         <Projects />
-        <CPProfiles />
-        <Achievements />
+        <WorkExperience />
         <Contact />
-        <Footer />
+        <div className="hidden md:block">
+          <Footer />
+        </div>
       </div>
-
-      <motion.div ref={scrollToTopRef} style={{ opacity }} className="fixed bottom-8 right-8 z-50">
-        <Button
-          onClick={scrollToTop}
-          size="icon"
-          className="rounded-full bg-violet-700 hover:bg-violet-600 shadow-[0_0_15px_rgba(139,92,246,0.5)] transition-all duration-300 hover:shadow-[0_0_20px_rgba(139,92,246,0.8)]"
-        >
-          <ArrowUp className="h-5 w-5" />
-          <span className="sr-only">Scroll to top</span>
-        </Button>
-      </motion.div>
     </main>
   )
 }

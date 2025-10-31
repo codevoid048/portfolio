@@ -10,9 +10,9 @@ export default function Footer() {
   }, [])
 
   return (
-    <footer className="py-8 border-t border-gray-800 relative overflow-hidden">
+    <footer className="py-8 border-t border-border relative overflow-hidden">
       {/* Subtle background overlay for better readability */}
-      <div className="absolute inset-0 bg-black/30"></div>
+      <div className="absolute inset-0 bg-background/50 pointer-events-none"></div>
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row items-center justify-center">
           <motion.div
@@ -21,7 +21,7 @@ export default function Footer() {
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
           >
-            <p className="text-gray-400 text-center">
+            <p className="text-foreground text-center">
               &copy; {currentYear} William (code__void) &nbsp;
             </p>
           </motion.div>
@@ -37,7 +37,7 @@ export default function Footer() {
               href="https://github.com/codevoid048"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gray-400 hover:text-violet-400 transition-colors duration-300"
+              className="text-foreground/70 hover:text-foreground/100 transition-colors duration-300"
               aria-label="GitHub"
             >
               <Github className="h-5 w-5" />
@@ -46,7 +46,7 @@ export default function Footer() {
               href="https://linkedin.com/in/codevoid"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gray-400 hover:text-violet-400 transition-colors duration-300"
+              className="text-foreground/70 hover:text-foreground/100 transition-colors duration-300"
               aria-label="LinkedIn"
             >
               <Linkedin className="h-5 w-5" />
@@ -55,14 +55,14 @@ export default function Footer() {
               href="https://x.com/code__void"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gray-400 hover:text-violet-400 transition-colors duration-300"
+              className="text-foreground/70 hover:text-foreground/100 transition-colors duration-300"
               aria-label="Twitter"
             >
               <Twitter className="h-5 w-5" />
             </a>
             <a
               href="mailto:williamkeri007@gmail.com"
-              className="text-gray-400 hover:text-violet-400 transition-colors duration-300"
+              className="text-foreground/70 hover:text-foreground/100 transition-colors duration-300"
               aria-label="Email"
             >
               <Mail className="h-5 w-5" />

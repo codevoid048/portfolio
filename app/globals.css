@@ -1,3 +1,4 @@
+/* Updated: 2025-10-31T07:17:43.259Z */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -85,16 +86,22 @@
 }
 
 ::-webkit-scrollbar-track {
-  background: rgba(15, 15, 15, 0.5);
-}
-
-::-webkit-scrollbar-thumb {
-  background: rgba(139, 92, 246, 0.5);
+  background: hsl(var(--muted) / 0.3);
   border-radius: 4px;
 }
 
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--muted-foreground) / 0.4);
+  border-radius: 4px;
+  transition: background 0.3s ease;
+}
+
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(139, 92, 246, 0.8);
+  background: hsl(var(--muted-foreground) / 0.6);
+}
+
+::-webkit-scrollbar-corner {
+  background: hsl(var(--muted) / 0.3);
 }
 
 /* Gradient text */
@@ -104,7 +111,7 @@
 
 /* Glassmorphism */
 .glass {
-  @apply bg-gray-900/50 backdrop-blur-sm border border-gray-800;
+  @apply bg-card/50 backdrop-blur-sm border border-border;
 }
 
 /* Glow effects */
@@ -119,4 +126,9 @@
 /* Parallax */
 .parallax {
   transition: transform 0.2s ease-out;
+}
+
+/* Hide Next.js error overlay portal */
+nextjs-portal {
+  display: none !important;
 }
