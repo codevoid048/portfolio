@@ -14,7 +14,7 @@ export default function Intro() {
           transition={{ duration: 0.6 }}
           className="text-center max-w-2xl mx-auto"
         >
-          <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight text-foreground">
+          <h1 className="text-4xl md:text-6xl font-extrabold font-sans tracking-tight text-foreground">
             William Keri
           </h1>
           <p className="mt-3 font-bold text-base md:text-lg text-muted-foreground">

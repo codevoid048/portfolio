@@ -66,8 +66,8 @@ export default function Contact() {
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.8 }}
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-6 text-center">
-            <span className="text-foreground">Get In Touch</span>
+          <h2 className="text-3xl md:text-4xl font-bold font-sans mb-6 text-center">
+            Get In Touch
           </h2>
 
           <motion.div
@@ -78,7 +78,7 @@ export default function Contact() {
             className="max-w-2xl mx-auto"
           >
             <div className="bg-card/50 backdrop-blur-sm rounded-xl p-8 border border-border">
-              <h3 className="text-2xl font-semibold mb-6 text-foreground text-center">Send Me a Message</h3>
+              <h3 className="text-2xl font-semibold font-sans mb-6 text-foreground text-center">Send Me a Message</h3>
 
               {isSubmitted ? (
                 <motion.div

@@ -121,7 +121,7 @@ export default function Projects() {
         transition={{ duration: 0.8 }}
       >
         <motion.h2
-          className="text-3xl md:text-4xl font-bold mb-6 text-center text-foreground"
+          className="text-3xl md:text-4xl font-bold font-sans mb-6 text-center text-foreground"
           initial={{ scale: 0.8, opacity: 0 }}
           whileInView={{ scale: 1, opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.2 }}
@@ -173,7 +173,7 @@ export default function Projects() {
               onClick={(e) => e.stopPropagation()}
             >
               <div className="flex justify-between items-start mb-4">
-                <h3 className="text-2xl font-semibold text-foreground">{selectedProject.title}</h3>
+                <h3 className="text-2xl font-semibold font-sans text-foreground">{selectedProject.title}</h3>
                 <button
                   onClick={closeModal}
                   className="text-muted-foreground hover:text-foreground transition-colors"
