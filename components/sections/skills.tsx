@@ -13,7 +13,7 @@ export default function Skills() {
   const allSkills = Object.values(skillCategories).flat()
 
   return (
-    <section id="skills" className="py-20 relative overflow-hidden">
+    <section id="skills" className="py-6 md:py-10 relative overflow-hidden">
       {/* Subtle background overlay for better readability */}
       <div className="absolute inset-0 bg-background/80" />
 
@@ -25,7 +25,7 @@ export default function Skills() {
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.8 }}
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center text-foreground">My Skills</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-6 text-center text-foreground">My Skills</h2>
 
           <div className="max-w-2xl mx-auto">
             <div className="flex flex-wrap justify-center gap-2 sm:gap-3">

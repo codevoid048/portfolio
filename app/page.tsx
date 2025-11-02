@@ -47,9 +47,9 @@ export default function Home() {
       <div className="relative z-20">
         <Navbar />
         <Intro />
+        <WorkExperience />
         <Skills />
         <Projects />
-        <WorkExperience />
         <Contact />
         <div className="hidden md:block">
           <Footer />

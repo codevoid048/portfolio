@@ -68,47 +68,92 @@ export default function Projects() {
   ]
 
   return (
-    <section id="projects" className="py-20 relative overflow-hidden">
-      {/* Subtle background overlay for better readability */}
+    <section id="projects" className="py-6 md:py-10 relative overflow-hidden">
+      {/* Animated background elements */}
       <div className="absolute inset-0 bg-background/80"></div>
 
+      {/* Floating geometric shapes */}
+      <motion.div
+        className="absolute top-20 left-10 w-20 h-20 border border-accent/20 rounded-full"
+        animate={{
+          y: [0, -20, 0],
+          rotate: [0, 180, 360],
+        }}
+        transition={{
+          duration: 8,
+          repeat: Infinity,
+          ease: "easeInOut"
+        }}
+      />
+      <motion.div
+        className="absolute top-40 right-20 w-16 h-16 border border-accent/20 rounded-lg"
+        animate={{
+          y: [0, 15, 0],
+          x: [0, -10, 0],
+        }}
+        transition={{
+          duration: 6,
+          repeat: Infinity,
+          ease: "easeInOut",
+          delay: 1
+        }}
+      />
+      <motion.div
+        className="absolute bottom-32 left-1/4 w-12 h-12 bg-accent/10 rounded-full blur-sm"
+        animate={{
+          scale: [1, 1.2, 1],
+          opacity: [0.3, 0.6, 0.3],
+        }}
+        transition={{
+          duration: 4,
+          repeat: Infinity,
+          ease: "easeInOut",
+          delay: 2
+        }}
+      />
+
       <div className="container mx-auto px-4 relative z-10">
-        <motion.div
-          className="animate-on-scroll max-w-6xl mx-auto"
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.8 }}
+      <motion.div
+        className="animate-on-scroll max-w-6xl mx-auto"
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.8 }}
+      >
+        <motion.h2
+          className="text-3xl md:text-4xl font-bold mb-6 text-center text-foreground"
+          initial={{ scale: 0.8, opacity: 0 }}
+          whileInView={{ scale: 1, opacity: 1 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center text-foreground">
-            Projects
-          </h2>
+          Projects
+        </motion.h2>
 
-          {/* Tab Toggle */}
-          <div className="mb-12">
-            <div className="bg-card/50 border border-border p-1.5 rounded-full flex w-fit mx-auto shadow-inner">
-              <TabButton active={activeTab === "freelance"} onClick={() => setActiveTab("freelance")}>
-                Freelance
-              </TabButton>
-              <TabButton active={activeTab === "personal"} onClick={() => setActiveTab("personal")}>
-                Personal
-              </TabButton>
-            </div>
+        {/* Tab Toggle */}
+        <div className="mb-6">
+          <div className="bg-card/50 border border-border p-1.5 rounded-full flex w-fit mx-auto shadow-inner">
+            <TabButton active={activeTab === "freelance"} onClick={() => setActiveTab("freelance")}>
+              Freelance
+            </TabButton>
+            <TabButton active={activeTab === "personal"} onClick={() => setActiveTab("personal")}>
+              Personal
+            </TabButton>
           </div>
+        </div>
 
-          {/* Tab Content */}
-          <div className="min-h-[400px]">
-            <AnimatePresence>
-              {activeTab === "personal" && (
-                <PersonalProjectsContent projects={personalProjects} />
-              )}
-              {activeTab === "freelance" && (
-                <FreelanceProjectsContent projects={freelanceProjects} />
-              )}
-            </AnimatePresence>
-          </div>
-        </motion.div>
-      </div>
+        {/* Tab Content */}
+        <div className="min-h-[400px]">
+          <AnimatePresence>
+            {activeTab === "personal" && (
+              <PersonalProjectsContent projects={personalProjects} />
+            )}
+            {activeTab === "freelance" && (
+              <FreelanceProjectsContent projects={freelanceProjects} />
+            )}
+          </AnimatePresence>
+        </div>
+      </motion.div>
+    </div>
 
       {/* Project Modal */}
       <AnimatePresence>
@@ -224,7 +269,7 @@ function PersonalProjectsContent({ projects }: { projects: any[] }) {
       exit={{ opacity: 0, y: -20 }}
       transition={{ duration: 0.5 }}
     >
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto">
+      <div className="grid grid-cols-1 gap-6 max-w-2xl mx-auto">
         {projects.map((project, index) => (
           <ProjectCard key={index} project={project} index={index} type="Personal" />
         ))}
@@ -267,57 +312,141 @@ function ProjectCard({
 }) {
   return (
     <motion.div
-      className="relative rounded-xl border border-border bg-card/50 p-6"
-      initial={{ opacity: 0, y: 50 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.5, delay: index * 0.08 }}
-      whileHover={{ y: -4 }}
+      className="relative rounded-xl border border-border bg-card/50 p-6 group cursor-pointer"
+      initial={{ opacity: 0, y: 50, rotateX: -15 }}
+      whileInView={{
+        opacity: 1,
+        y: 0,
+        rotateX: 0
+      }}
+      viewport={{ once: true, margin: "-50px" }}
+      transition={{
+        duration: 0.6,
+        delay: index * 0.1,
+        type: "spring",
+        bounce: 0.3
+      }}
+      whileHover={{
+        y: -8,
+        scale: 1.02,
+        rotateY: 2,
+        boxShadow: "0 20px 40px rgba(0,0,0,0.1)"
+      }}
+      whileTap={{ scale: 0.98 }}
     >
+      {/* Animated border gradient */}
+      <motion.div
+        className="absolute inset-0 rounded-xl bg-gradient-to-r from-accent/20 via-accent/30 to-accent/20 opacity-0 group-hover:opacity-100"
+        initial={false}
+        animate={{ backgroundPosition: ["0% 50%", "100% 50%"] }}
+        transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+        style={{ backgroundSize: "200% 200%" }}
+      />
 
-      <h3 className="text-xl font-semibold mb-2 text-foreground">{project.title}</h3>
+      {/* Floating particles on hover */}
+      <motion.div
+        className="absolute -top-2 -right-2 w-2 h-2 bg-accent rounded-full"
+        initial={{ scale: 0, opacity: 0 }}
+        whileHover={{
+          scale: [0, 1, 0],
+          opacity: [0, 1, 0],
+          y: -20
+        }}
+        transition={{ duration: 0.8, delay: 0.2 }}
+      />
+      <motion.div
+        className="absolute -bottom-2 -left-2 w-1.5 h-1.5 bg-accent rounded-full"
+        initial={{ scale: 0, opacity: 0 }}
+        whileHover={{
+          scale: [0, 1, 0],
+          opacity: [0, 1, 0],
+          y: 20
+        }}
+        transition={{ duration: 0.8, delay: 0.4 }}
+      />
 
-      <p className="text-muted-foreground mb-4 leading-relaxed">{project.description}</p>
+      <motion.h3
+        className="text-xl font-bold mb-2 text-foreground"
+        initial={{ x: -20, opacity: 0 }}
+        whileInView={{ x: 0, opacity: 1 }}
+        transition={{ delay: index * 0.1 + 0.2 }}
+      >
+        {project.title}
+      </motion.h3>
+
+      <motion.p
+        className="text-muted-foreground mb-4 leading-relaxed"
+        initial={{ x: -20, opacity: 0 }}
+        whileInView={{ x: 0, opacity: 1 }}
+        transition={{ delay: index * 0.1 + 0.3 }}
+      >
+        {project.description}
+      </motion.p>
 
       {project.tags?.length ? (
-        <div className="flex flex-wrap gap-2 mb-4">
+        <motion.div
+          className="flex flex-wrap gap-2 mb-4"
+          initial={{ y: 20, opacity: 0 }}
+          whileInView={{ y: 0, opacity: 1 }}
+          transition={{ delay: index * 0.1 + 0.4 }}
+        >
           {project.tags.map((tag, tagIndex) => (
-            <Badge
+            <motion.div
               key={tagIndex}
-              variant="outline"
-              className="bg-accent/50 text-accent-foreground border-border"
+              initial={{ scale: 0, rotate: -10 }}
+              whileInView={{ scale: 1, rotate: 0 }}
+              transition={{
+                delay: index * 0.1 + 0.5 + tagIndex * 0.05,
+                type: "spring",
+                bounce: 0.5
+              }}
+              whileHover={{ scale: 1.1, rotate: 5 }}
             >
-              {tag}
-            </Badge>
+              <Badge
+                variant="outline"
+                className="bg-accent/50 text-accent-foreground border-border hover:bg-accent hover:text-accent-foreground transition-colors"
+              >
+                {tag}
+              </Badge>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       ) : null}
 
-      <div className="flex gap-6">
+      <motion.div
+        className="flex gap-6"
+        initial={{ y: 20, opacity: 0 }}
+        whileInView={{ y: 0, opacity: 1 }}
+        transition={{ delay: index * 0.1 + 0.6 }}
+      >
         {project.github && (
-          <a
+          <motion.a
             href={project.github}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center text-muted-foreground hover:text-foreground transition-colors"
+            whileHover={{ scale: 1.05, x: 2 }}
+            whileTap={{ scale: 0.95 }}
           >
             <Github className="h-5 w-5 mr-1" />
             <span>Repo</span>
-          </a>
+          </motion.a>
         )}
 
         {project.demo && (
-          <a
+          <motion.a
             href={project.demo}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center text-muted-foreground hover:text-foreground transition-colors"
+            whileHover={{ scale: 1.05, x: 2 }}
+            whileTap={{ scale: 0.95 }}
           >
             <ExternalLink className="h-5 w-5 mr-1" />
             <span>Live</span>
-          </a>
+          </motion.a>
         )}
-      </div>
+      </motion.div>
     </motion.div>
   )
 }

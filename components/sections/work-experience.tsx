@@ -26,7 +26,7 @@ const experiences: Experience[] = [
 
 export default function WorkExperience() {
   return (
-    <section id="work" className="py-20 relative overflow-hidden">
+    <section id="experience" className="py-8 md:py-16 relative overflow-hidden">
       <div className="absolute inset-0 bg-background/90" />
       <div className="container mx-auto px-4 relative z-10">
         <motion.div
@@ -36,7 +36,7 @@ export default function WorkExperience() {
           transition={{ duration: 0.6 }}
           className="max-w-2xl mx-auto"
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-10 text-center text-foreground">Experience</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-6 text-center text-foreground">Experience</h2>
 
           <div className="space-y-6">
             {experiences.map((exp, idx) => (

@@ -54,7 +54,7 @@ export default function Contact() {
   }
 
   return (
-    <section id="contact" className="py-20 relative overflow-hidden">
+    <section id="contact" className="py-6 md:py-10 mb-10 relative overflow-hidden">
       {/* Subtle background overlay for better readability */}
       <div className="absolute inset-0 bg-background/80"></div>
 
@@ -66,7 +66,7 @@ export default function Contact() {
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.8 }}
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">
+          <h2 className="text-3xl md:text-4xl font-bold mb-6 text-center">
             <span className="text-foreground">Get In Touch</span>
           </h2>
 

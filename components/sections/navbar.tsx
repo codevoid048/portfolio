@@ -17,9 +17,9 @@ export default function Navbar() {
 
   const navItems = [
     { id: "about", label: "About", icon: User },
+    { id: "experience", label: "Experience", icon: Briefcase },
     { id: "skills", label: "Skills", icon: Code },
     { id: "projects", label: "Projects", icon: Folder },
-    { id: "work", label: "Work", icon: Briefcase },
     { id: "contact", label: "Contact", icon: Mail },
   ]
 
@@ -138,10 +138,8 @@ export default function Navbar() {
             className={`transition-all duration-500 ${scrolled ? "scale-95" : "scale-100"}`}
           >
             <div className="relative">
-              {/* Glassmorphism container */}
               <div className="bg-background/80 backdrop-blur-lg border border-border rounded-full px-6 py-3 shadow-2xl w-[600px] md:w-[700px]">
                 <div className="flex items-center justify-center px-4 gap-2">
-                  {/* Navigation Items + Theme Toggle */}
                   <div className="flex items-center space-x-1">
                     {navItems.map((item) => (
                       <NavItem
@@ -163,7 +161,6 @@ export default function Navbar() {
                 </div>
               </div>
 
-              {/* Glow effect */}
               <div className="absolute inset-0 bg-foreground/10 rounded-full blur-xl -z-10 opacity-40" />
             </div>
           </motion.nav>
@@ -172,7 +169,7 @@ export default function Navbar() {
 
       {/* Mobile Bottom Navbar */}
       <div className="md:hidden fixed inset-x-0 bottom-4 z-[9999] flex justify-center">
-        <nav className="mx-4 w-full max-w-sm rounded-full bg-background/80 backdrop-blur-lg border border-border shadow-xl">
+        <nav className="mx-4 w-[300px] max-w-sm rounded-full bg-background/80 backdrop-blur-lg border border-border shadow-xl">
           <ul className="grid grid-cols-6">
             {navItems.map((item) => {
               const Icon = item.icon
@@ -191,7 +188,6 @@ export default function Navbar() {
                 </li>
               )
             })}
-            {/* Theme toggle (mobile) */}
             <li>
               <button
                 ref={mobileThemeButtonRef}

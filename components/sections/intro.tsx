@@ -5,7 +5,7 @@ import { Github, Linkedin, Mail, Twitter } from "lucide-react"
 
 export default function Intro() {
   return (
-    <section id="about" className="pt-28 pb-10 relative">
+    <section id="about" className="pt-10 md:pt-28 pb-4 md:pb-10 relative">
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -29,7 +29,7 @@ export default function Intro() {
           </div>
 
           <motion.div
-            className="mt-8 flex justify-center space-x-6"
+            className="mt-4 flex justify-center space-x-6"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
