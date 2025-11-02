@@ -139,7 +139,7 @@ export default function Navbar() {
           >
             <div className="relative">
               {/* Glassmorphism container */}
-              <div className="bg-background/80 backdrop-blur-lg border border-border rounded-full px-6 py-3 shadow-2xl w-[600px] md:w-[700px] lg:w-[850px] xl:w-[1024px]">
+              <div className="bg-background/80 backdrop-blur-lg border border-border rounded-full px-6 py-3 shadow-2xl w-[600px] md:w-[700px]">
                 <div className="flex items-center justify-center px-4 gap-2">
                   {/* Navigation Items + Theme Toggle */}
                   <div className="flex items-center space-x-1">

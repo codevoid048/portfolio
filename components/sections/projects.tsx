@@ -224,7 +224,7 @@ function PersonalProjectsContent({ projects }: { projects: any[] }) {
       exit={{ opacity: 0, y: -20 }}
       transition={{ duration: 0.5 }}
     >
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto">
         {projects.map((project, index) => (
           <ProjectCard key={index} project={project} index={index} type="Personal" />
         ))}
@@ -241,7 +241,7 @@ function FreelanceProjectsContent({ projects }: { projects: any[] }) {
       exit={{ opacity: 0, y: -20 }}
       transition={{ duration: 0.5 }}
     >
-      <div className="grid grid-cols-1 gap-6 max-w-4xl mx-auto">
+      <div className="grid grid-cols-1 gap-6 max-w-2xl mx-auto">
         {projects.map((project, index) => (
           <ProjectCard key={index} project={project} index={index} type="Freelance" />
         ))}

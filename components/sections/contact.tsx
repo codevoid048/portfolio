@@ -75,7 +75,7 @@ export default function Contact() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="max-w-3xl mx-auto"
+            className="max-w-2xl mx-auto"
           >
             <div className="bg-card/50 backdrop-blur-sm rounded-xl p-8 border border-border">
               <h3 className="text-2xl font-semibold mb-6 text-foreground text-center">Send Me a Message</h3>

@@ -27,7 +27,7 @@ export default function Skills() {
         >
           <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center text-foreground">My Skills</h2>
 
-          <div className="max-w-4xl mx-auto">
+          <div className="max-w-2xl mx-auto">
             <div className="flex flex-wrap justify-center gap-2 sm:gap-3">
               {allSkills.map((skill, index) => (
                 <SkillPill key={index} skill={skill} delay={index * 0.03} />
@@ -47,7 +47,7 @@ function SkillPill({ skill, delay }: { skill: string; delay: number }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.4, delay }}
-      className="whitespace-nowrap font-bold rounded-full border border-border px-3 py-1 text-xs md:text-sm text-muted-foreground hover:bg-accent/50 hover:border-border transition-colors"
+      className="whitespace-nowrap font-bold rounded-lg border border-border px-3 py-1 text-xs md:text-sm text-muted-foreground hover:bg-accent/50 hover:border-border transition-colors"
     >
       {skill}
     </motion.span>

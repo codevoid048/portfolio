@@ -34,9 +34,9 @@ export default function WorkExperience() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6 }}
-          className="max-w-4xl mx-auto"
+          className="max-w-2xl mx-auto"
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-10 text-center text-foreground">Work Experience</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-10 text-center text-foreground">Experience</h2>
 
           <div className="space-y-6">
             {experiences.map((exp, idx) => (
