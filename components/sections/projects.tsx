@@ -1,23 +1,11 @@
 import type React from "react"
 import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { ExternalLink, Github, X } from "lucide-react"
+import { ExternalLink, Github } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 
 export default function Projects() {
   const [activeTab, setActiveTab] = useState<"personal" | "freelance">("freelance")
-  const [selectedProject, setSelectedProject] = useState<any>(null)
-  const [isModalOpen, setIsModalOpen] = useState(false)
-
-  const openModal = (project: any) => {
-    setSelectedProject(project)
-    setIsModalOpen(true)
-  }
-
-  const closeModal = () => {
-    setIsModalOpen(false)
-    setSelectedProject(null)
-  }
 
   const personalProjects = [
     {
@@ -113,120 +101,47 @@ export default function Projects() {
       />
 
       <div className="container mx-auto px-4 relative z-10">
-      <motion.div
-        className="animate-on-scroll max-w-6xl mx-auto"
-        initial={{ opacity: 0, y: 50 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-100px" }}
-        transition={{ duration: 0.8 }}
-      >
-        <motion.h2
-          className="text-3xl md:text-4xl font-bold font-sans mb-6 text-center text-foreground"
-          initial={{ scale: 0.8, opacity: 0 }}
-          whileInView={{ scale: 1, opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
+        <motion.div
+          className="animate-on-scroll max-w-6xl mx-auto"
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.8 }}
         >
-          Projects
-        </motion.h2>
-
-        {/* Tab Toggle */}
-        <div className="mb-6">
-          <div className="bg-card/50 border border-border p-1.5 rounded-full flex w-fit mx-auto shadow-inner">
-            <TabButton active={activeTab === "freelance"} onClick={() => setActiveTab("freelance")}>
-              Freelance
-            </TabButton>
-            <TabButton active={activeTab === "personal"} onClick={() => setActiveTab("personal")}>
-              Personal
-            </TabButton>
-          </div>
-        </div>
-
-        {/* Tab Content */}
-        <div className="min-h-[400px]">
-          <AnimatePresence>
-            {activeTab === "personal" && (
-              <PersonalProjectsContent projects={personalProjects} />
-            )}
-            {activeTab === "freelance" && (
-              <FreelanceProjectsContent projects={freelanceProjects} />
-            )}
-          </AnimatePresence>
-        </div>
-      </motion.div>
-    </div>
-
-      {/* Project Modal */}
-      <AnimatePresence>
-        {isModalOpen && selectedProject && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4"
-            onClick={closeModal}
+          <motion.h2
+            className="text-3xl md:text-4xl font-bold font-sans mb-6 text-center text-foreground"
+            initial={{ scale: 0.8, opacity: 0 }}
+            whileInView={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <motion.div
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.9, opacity: 0 }}
-              className="bg-card border border-border rounded-xl p-6 max-w-2xl w-full max-h-[80vh] overflow-y-auto"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <div className="flex justify-between items-start mb-4">
-                <h3 className="text-2xl font-semibold font-sans text-foreground">{selectedProject.title}</h3>
-                <button
-                  onClick={closeModal}
-                  className="text-muted-foreground hover:text-foreground transition-colors"
-                >
-                  <X className="h-6 w-6" />
-                </button>
-              </div>
+            Projects
+          </motion.h2>
 
-              <p className="text-muted-foreground mb-6 leading-relaxed">{selectedProject.description}</p>
+          {/* Tab Toggle */}
+          <div className="mb-6">
+            <div className="bg-card/50 border border-border p-1.5 rounded-full flex w-fit mx-auto shadow-inner">
+              <TabButton active={activeTab === "freelance"} onClick={() => setActiveTab("freelance")}>
+                Freelance
+              </TabButton>
+              <TabButton active={activeTab === "personal"} onClick={() => setActiveTab("personal")}>
+                Personal
+              </TabButton>
+            </div>
+          </div>
 
-              {selectedProject.tags?.length ? (
-                <div className="flex flex-wrap gap-2 mb-6">
-                  {selectedProject.tags.map((tag: string, tagIndex: number) => (
-                    <Badge
-                      key={tagIndex}
-                      variant="outline"
-                      className="bg-accent/50 text-accent-foreground border-border"
-                    >
-                      {tag}
-                    </Badge>
-                  ))}
-                </div>
-              ) : null}
-
-              <div className="flex gap-6">
-                {selectedProject.github && (
-                  <a
-                    href={selectedProject.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center text-muted-foreground hover:text-foreground transition-colors"
-                  >
-                    <Github className="h-5 w-5 mr-1" />
-                    <span>View Repository</span>
-                  </a>
-                )}
-
-                {selectedProject.demo && (
-                  <a
-                    href={selectedProject.demo}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center text-muted-foreground hover:text-foreground transition-colors"
-                  >
-                    <ExternalLink className="h-5 w-5 mr-1" />
-                    <span>View Live Demo</span>
-                  </a>
-                )}
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+          {/* Tab Content */}
+          <div className="min-h-[400px]">
+            <AnimatePresence>
+              {activeTab === "personal" && (
+                <PersonalProjectsContent projects={personalProjects} />
+              )}
+              {activeTab === "freelance" && (
+                <FreelanceProjectsContent projects={freelanceProjects} />
+              )}
+            </AnimatePresence>
+          </div>
+        </motion.div>
+      </div>
     </section>
   )
 }
@@ -312,7 +227,7 @@ function ProjectCard({
 }) {
   return (
     <motion.div
-      className="relative rounded-xl border border-border bg-card/50 p-6 group cursor-pointer"
+      className="relative rounded-xl border border-border bg-card/50 p-6 group"
       initial={{ opacity: 0, y: 50, rotateX: -15 }}
       whileInView={{
         opacity: 1,
@@ -420,31 +335,29 @@ function ProjectCard({
         transition={{ delay: index * 0.1 + 0.6 }}
       >
         {project.github && (
-          <motion.a
+          <a
             href={project.github}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center text-muted-foreground hover:text-foreground transition-colors"
-            whileHover={{ scale: 1.05, x: 2 }}
-            whileTap={{ scale: 0.95 }}
+            className="inline-flex items-center text-muted-foreground hover:text-foreground transition-colors z-10 relative"
+            style={{ pointerEvents: 'auto' }}
           >
             <Github className="h-5 w-5 mr-1" />
             <span>Repo</span>
-          </motion.a>
+          </a>
         )}
 
         {project.demo && (
-          <motion.a
+          <a
             href={project.demo}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center text-muted-foreground hover:text-foreground transition-colors"
-            whileHover={{ scale: 1.05, x: 2 }}
-            whileTap={{ scale: 0.95 }}
+            className="inline-flex items-center text-muted-foreground hover:text-foreground transition-colors z-10 relative"
+            style={{ pointerEvents: 'auto' }}
           >
             <ExternalLink className="h-5 w-5 mr-1" />
             <span>Live</span>
-          </motion.a>
+          </a>
         )}
       </motion.div>
     </motion.div>
