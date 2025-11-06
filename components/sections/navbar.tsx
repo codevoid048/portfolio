@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { User, Code, Briefcase, Mail, Folder, Sun, Moon } from "lucide-react"
 import { useTheme } from "next-themes"
+import Dock, { type DockItemData } from "@/components/ui/dock"
 
 export default function Navbar() {
   const [activeSection, setActiveSection] = useState("about")
@@ -12,7 +13,6 @@ export default function Navbar() {
   const [isAnimating, setIsAnimating] = useState(false)
   const [animationOrigin, setAnimationOrigin] = useState({ x: 0, y: 0 })
   const desktopThemeButtonRef = useRef<HTMLButtonElement>(null)
-  const mobileThemeButtonRef = useRef<HTMLButtonElement>(null)
   const { theme, setTheme } = useTheme()
 
   const navItems = [
@@ -67,8 +67,19 @@ export default function Navbar() {
 
   const toggleTheme = () => {
     // Determine which button is currently visible and get its position
-    const currentButtonRef = window.innerWidth >= 768 ? desktopThemeButtonRef : mobileThemeButtonRef
-    const buttonElement = currentButtonRef.current
+    const isMobile = window.innerWidth < 768
+    let buttonElement: HTMLElement | null = null
+
+    if (!isMobile) {
+      buttonElement = desktopThemeButtonRef.current
+    } else {
+      // For mobile, find the theme button in the dock
+      const dockItems = document.querySelectorAll('[role="toolbar"] [role="button"]')
+      if (dockItems.length > 0) {
+        // Theme switcher is the last item in the dock
+        buttonElement = dockItems[dockItems.length - 1] as HTMLElement
+      }
+    }
 
     if (buttonElement) {
       const rect = buttonElement.getBoundingClientRect()
@@ -87,6 +98,9 @@ export default function Navbar() {
       setTimeout(() => {
         setIsAnimating(false)
       }, 1400)
+    } else {
+      // Fallback
+      setTheme(theme === "dark" ? "light" : "dark")
     }
   }
 
@@ -167,40 +181,25 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* Mobile Bottom Navbar */}
-      <div className="md:hidden fixed inset-x-0 bottom-4 z-[9999] flex justify-center">
-        <nav className="mx-4 w-[300px] max-w-sm rounded-full bg-background/80 backdrop-blur-lg border border-border shadow-xl">
-          <ul className="grid grid-cols-6">
-            {navItems.map((item) => {
-              const Icon = item.icon
-              const active = activeSection === item.id
-              return (
-                <li key={item.id}>
-                  <button
-                    onClick={() => handleNavigation(item.id)}
-                    className={`w-full py-3 flex flex-col items-center gap-1 text-xs transition-colors ${
-                      active ? "text-foreground" : "text-muted-foreground hover:text-foreground"
-                    }`}
-                  >
-                    <Icon className={`h-5 w-5 ${active ? "" : "opacity-80"}`} />
-                    <span className="sr-only sm:not-sr-only sm:block">{item.label}</span>
-                  </button>
-                </li>
-              )
-            })}
-            <li>
-              <button
-                ref={mobileThemeButtonRef}
-                onClick={toggleTheme}
-                aria-label="Toggle theme"
-                className="w-full py-3 flex flex-col items-center gap-1 text-xs text-muted-foreground hover:text-foreground transition-colors"
-              >
-                {theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
-                <span className="sr-only sm:not-sr-only sm:block">Theme</span>
-              </button>
-            </li>
-          </ul>
-        </nav>
+      {/* Mobile Dock Navbar */}
+      <div className="md:hidden fixed inset-x-0 bottom-0 z-[9999] flex justify-center">
+        <Dock
+          items={navItems.map(item => ({
+            icon: <item.icon size={20} />,
+            label: item.label,
+            onClick: () => handleNavigation(item.id),
+            className: activeSection === item.id ? "bg-accent border-accent-foreground/50" : ""
+          })).concat({
+            icon: theme === "dark" ? <Sun size={20} /> : <Moon size={20} />,
+            label: "Theme",
+            onClick: toggleTheme,
+            className: ""
+          })}
+          panelHeight={64}
+          baseItemSize={36}
+          magnification={48}
+          distance={80}
+        />
       </div>
     </>
   )
