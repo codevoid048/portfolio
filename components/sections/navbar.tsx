@@ -3,17 +3,17 @@
 import { useState, useEffect, useRef } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { User, Code, Briefcase, Mail, Folder, Sun, Moon } from "lucide-react"
-import { useTheme } from "next-themes"
+// import { useTheme } from "next-themes"
 import Dock, { type DockItemData } from "@/components/ui/dock"
 
 export default function Navbar() {
   const [activeSection, setActiveSection] = useState("about")
   const [scrolled, setScrolled] = useState(false)
   const [isOpen, setIsOpen] = useState(false)
-  const [isAnimating, setIsAnimating] = useState(false)
-  const [animationOrigin, setAnimationOrigin] = useState({ x: 0, y: 0 })
-  const desktopThemeButtonRef = useRef<HTMLButtonElement>(null)
-  const { theme, setTheme } = useTheme()
+  // const [isAnimating, setIsAnimating] = useState(false)
+  // const [animationOrigin, setAnimationOrigin] = useState({ x: 0, y: 0 })
+  // const desktopThemeButtonRef = useRef<HTMLButtonElement>(null)
+  // const { theme, setTheme } = useTheme()
 
   const navItems = [
     { id: "about", label: "About", icon: User },
@@ -65,6 +65,8 @@ export default function Navbar() {
     }, 100)
   }
 
+  // Theme switcher function commented out - default dark theme
+  /*
   const toggleTheme = () => {
     // Determine which button is currently visible and get its position
     const isMobile = window.innerWidth < 768
@@ -103,10 +105,12 @@ export default function Navbar() {
       setTheme(theme === "dark" ? "light" : "dark")
     }
   }
+  */
 
   return (
     <>
-      {/* Theme Transition Overlay */}
+      {/* Theme Transition Overlay commented out - default dark theme */}
+      {/*
       <AnimatePresence>
         {isAnimating && (
           <motion.div
@@ -142,6 +146,7 @@ export default function Navbar() {
           />
         )}
       </AnimatePresence>
+      */}
       {/* Desktop Floating Navbar */}
       <div className="fixed top-3 left-0 right-0 z-50 hidden md:block">
         <div className="flex justify-center">
@@ -152,7 +157,7 @@ export default function Navbar() {
             className={`transition-all duration-500 ${scrolled ? "scale-95" : "scale-100"}`}
           >
             <div className="relative">
-              <div className="bg-background/80 backdrop-blur-lg border border-border rounded-full px-6 py-3 shadow-2xl w-[600px] md:w-[700px]">
+              <div className="bg-background/20 backdrop-blur-lg border border-border rounded-full px-6 py-3 shadow-2xl w-[600px] md:w-[700px]">
                 <div className="flex items-center justify-center px-4 gap-2">
                   <div className="flex items-center space-x-1">
                     {navItems.map((item) => (
@@ -163,14 +168,15 @@ export default function Navbar() {
                         onClick={() => handleNavigation(item.id)}
                       />
                     ))}
-                    <button
+                    {/* Theme switcher commented out - default dark theme */}
+                    {/* <button
                       ref={desktopThemeButtonRef}
                       onClick={toggleTheme}
                       aria-label="Toggle theme"
                       className="ml-2 inline-flex items-center justify-center rounded-full border border-border bg-accent hover:bg-accent/80 text-foreground transition-colors h-8 w-8"
                     >
                       {theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
-                    </button>
+                    </button> */}
                   </div>
                 </div>
               </div>
@@ -188,13 +194,16 @@ export default function Navbar() {
             icon: <item.icon size={20} />,
             label: item.label,
             onClick: () => handleNavigation(item.id),
-            className: activeSection === item.id ? "bg-accent border-accent-foreground/50" : ""
-          })).concat({
+            className: activeSection !== item.id ? "bg-accent border-accent-foreground/50" : ""
+          }))
+          // Theme switcher commented out - default dark theme
+          /* .concat({
             icon: theme === "dark" ? <Sun size={20} /> : <Moon size={20} />,
             label: "Theme",
             onClick: toggleTheme,
             className: ""
-          })}
+          }) */
+          }
           panelHeight={64}
           baseItemSize={36}
           magnification={48}

@@ -6,6 +6,7 @@ import { ThemeProvider } from "@/components/theme-provider"
 import ErrorReporter from "@/components/ErrorReporter";
 import Script from "next/script";
 import { Analytics } from "@vercel/analytics/next"
+import Aurora from "@/components/ui/aurora"
 
 const inter = Inter({ 
   subsets: ["latin"],
@@ -83,8 +84,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${jetbrainsMono.variable}`}>
-      <body className="antialiased font-sans">
+    <html lang="en" className={`${inter.variable} ${jetbrainsMono.variable}`} suppressHydrationWarning>
+      <body className="antialiased font-sans relative">
+        {/* Aurora Background */}
+        <div className="fixed inset-0 -z-20 w-screen h-screen">
+          <Aurora
+            colorStops={["hsl(0 0% 12%)", "hsl(0 0% 40%)", "hsl(0 0% 95%)"]}
+            blend={0.5}
+            amplitude={1.0}
+            speed={0.5}
+          />
+        </div>
+
         <ErrorReporter />
         <Script
           src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/scripts//route-messenger.js"

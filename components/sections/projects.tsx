@@ -57,48 +57,6 @@ export default function Projects() {
 
   return (
     <section id="projects" className="py-6 md:py-10 relative overflow-hidden">
-      {/* Animated background elements */}
-      <div className="absolute inset-0 bg-background/80"></div>
-
-      {/* Floating geometric shapes */}
-      <motion.div
-        className="absolute top-20 left-10 w-20 h-20 border border-accent/20 rounded-full"
-        animate={{
-          y: [0, -20, 0],
-          rotate: [0, 180, 360],
-        }}
-        transition={{
-          duration: 8,
-          repeat: Infinity,
-          ease: "easeInOut"
-        }}
-      />
-      <motion.div
-        className="absolute top-40 right-20 w-16 h-16 border border-accent/20 rounded-lg"
-        animate={{
-          y: [0, 15, 0],
-          x: [0, -10, 0],
-        }}
-        transition={{
-          duration: 6,
-          repeat: Infinity,
-          ease: "easeInOut",
-          delay: 1
-        }}
-      />
-      <motion.div
-        className="absolute bottom-32 left-1/4 w-12 h-12 bg-accent/10 rounded-full blur-sm"
-        animate={{
-          scale: [1, 1.2, 1],
-          opacity: [0.3, 0.6, 0.3],
-        }}
-        transition={{
-          duration: 4,
-          repeat: Infinity,
-          ease: "easeInOut",
-          delay: 2
-        }}
-      />
 
       <div className="container mx-auto px-4 relative z-10">
         <motion.div
@@ -119,7 +77,7 @@ export default function Projects() {
 
           {/* Tab Toggle */}
           <div className="mb-6">
-            <div className="bg-card/50 border border-border p-1.5 rounded-full flex w-fit mx-auto shadow-inner">
+            <div className="bg-card/10 border border-border p-1.5 rounded-full flex w-fit mx-auto shadow-inner">
               <TabButton active={activeTab === "freelance"} onClick={() => setActiveTab("freelance")}>
                 Freelance
               </TabButton>
@@ -160,8 +118,8 @@ function TabButton({
       onClick={onClick}
       className={`px-6 py-2 rounded-full text-sm font-medium transition-all duration-300 relative ${
         active
-          ? "bg-accent text-accent-foreground border border-border"
-          : "text-muted-foreground hover:text-foreground hover:bg-accent/50 border border-transparent"
+          ? "bg-accent/40 text-accent-foreground border border-border"
+          : "text-foreground hover:text-foreground hover:bg-accent/30 border border-transparent"
       }`}
     >
       {children}
@@ -227,7 +185,7 @@ function ProjectCard({
 }) {
   return (
     <motion.div
-      className="relative rounded-xl border border-border bg-card/50 p-6 group"
+      className="relative rounded-xl border border-border bg-card/10 p-6 group"
       initial={{ opacity: 0, y: 50, rotateX: -15 }}
       whileInView={{
         opacity: 1,
@@ -290,7 +248,7 @@ function ProjectCard({
       </motion.h3>
 
       <motion.p
-        className="text-muted-foreground mb-4 leading-relaxed"
+        className="text-foreground mb-4 leading-relaxed"
         initial={{ x: -20, opacity: 0 }}
         whileInView={{ x: 0, opacity: 1 }}
         transition={{ delay: index * 0.1 + 0.3 }}

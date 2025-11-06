@@ -55,8 +55,6 @@ export default function Contact() {
 
   return (
     <section id="contact" className="py-6 md:py-10 mb-10 relative overflow-hidden">
-      {/* Subtle background overlay for better readability */}
-      <div className="absolute inset-0 bg-background/80"></div>
 
       <div className="container mx-auto px-4 relative z-10">
         <motion.div
@@ -77,14 +75,14 @@ export default function Contact() {
             transition={{ duration: 0.5 }}
             className="max-w-2xl mx-auto"
           >
-            <div className="bg-card/50 backdrop-blur-sm rounded-xl p-8 border border-border">
+            <div className="bg-card/10 backdrop-blur-sm rounded-xl p-8 border border-border">
               <h3 className="text-2xl font-semibold font-sans mb-6 text-foreground text-center">Send Me a Message</h3>
 
               {isSubmitted ? (
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="border border-border rounded-lg p-4 text-center bg-accent/50"
+                  className="border border-border rounded-lg p-4 text-center bg-accent/10"
                 >
                   <p className="text-foreground font-medium">
                     Thank you for your message! I'll get back to you soon.
@@ -94,7 +92,7 @@ export default function Contact() {
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                      <label htmlFor="name" className="block text-sm font-medium text-muted-foreground mb-1">
+                      <label htmlFor="name" className="block text-sm font-medium text-foreground mb-1">
                         Name
                       </label>
                       <Input
@@ -103,13 +101,13 @@ export default function Contact() {
                         value={formState.name}
                         onChange={handleChange}
                         required
-                        className="bg-background border-border text-foreground placeholder:text-muted-foreground"
+                        className="bg-card/20 border-border text-foreground placeholder:text-muted-foreground"
                         placeholder="Your name"
                       />
                     </div>
 
                     <div>
-                      <label htmlFor="email" className="block text-sm font-medium text-muted-foreground mb-1">
+                      <label htmlFor="email" className="block text-sm font-medium text-foreground mb-1">
                         Email
                       </label>
                       <Input
@@ -119,14 +117,14 @@ export default function Contact() {
                         value={formState.email}
                         onChange={handleChange}
                         required
-                        className="bg-background border-border text-foreground placeholder:text-muted-foreground"
+                        className="bg-card/20 border-border text-foreground placeholder:text-muted-foreground"
                         placeholder="Your email address"
                       />
                     </div>
                   </div>
 
                   <div>
-                    <label htmlFor="message" className="block text-sm font-medium text-muted-foreground mb-1">
+                    <label htmlFor="message" className="block text-sm font-medium text-foreground mb-1">
                       Message
                     </label>
                     <Textarea
@@ -135,7 +133,7 @@ export default function Contact() {
                       value={formState.message}
                       onChange={handleChange}
                       required
-                      className="bg-background border-border text-foreground placeholder:text-muted-foreground min-h-[100px]"
+                      className="bg-card/20 border-border text-foreground placeholder:text-muted-foreground min-h-[100px]"
                       placeholder="Your message to me..."
                     />
                   </div>
@@ -143,7 +141,7 @@ export default function Contact() {
                   <Button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full bg-accent hover:bg-accent/90 border border-border text-accent-foreground transition-all"
+                    className="w-full bg-accent/30 hover:bg-accent/50 border border-border text-accent-foreground transition-all"
                   >
                     {isSubmitting ? (
                       <span className="flex items-center">

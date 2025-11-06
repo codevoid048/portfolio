@@ -69,34 +69,6 @@ export default function Skills() {
 
   return (
     <section id="skills" className="py-6 md:py-10 relative overflow-hidden">
-      <div className="absolute inset-0 bg-background/80"></div>
-
-      {/* Subtle floating elements */}
-      <motion.div
-        className="absolute top-20 left-16 w-8 h-8 border border-accent/20 rounded-full"
-        animate={{
-          y: [0, -10, 0],
-          opacity: [0.3, 0.6, 0.3],
-        }}
-        transition={{
-          duration: 6,
-          repeat: Infinity,
-          ease: "easeInOut"
-        }}
-      />
-      <motion.div
-        className="absolute bottom-24 right-20 w-6 h-6 bg-accent/10 rounded-lg"
-        animate={{
-          rotate: [0, 180, 360],
-          scale: [1, 1.1, 1],
-        }}
-        transition={{
-          duration: 8,
-          repeat: Infinity,
-          ease: "easeInOut",
-          delay: 1
-        }}
-      />
 
       <div className="container mx-auto px-4 relative z-10">
         <motion.div
@@ -130,7 +102,7 @@ export default function Skills() {
               transition={{ duration: 0.6, delay: 0.3 }}
               className="mt-8"
             >
-              <h3 className="text-lg font-semibold text-center text-muted-foreground mb-4">
+              <h3 className="text-lg font-semibold text-center text-foreground mb-4">
                 Competitive Programming
               </h3>
               <div className="flex flex-wrap justify-center gap-3">
@@ -169,7 +141,7 @@ function SkillPill({ skill, delay }: { skill: string; delay: number }) {
         transition: { duration: 0.2, ease: "easeOut" }
       }}
       whileTap={{ scale: 0.95 }}
-      className="whitespace-nowrap font-bold rounded-lg border border-border px-3 py-1 text-xs md:text-sm text-muted-foreground hover:bg-accent/50 hover:border-accent/60 hover:text-accent-foreground transition-all duration-300 cursor-pointer focus:outline-none focus:ring-2 focus:ring-accent/50 focus:bg-accent/30"
+      className="whitespace-nowrap font-bold rounded-lg border border-border px-3 py-1 text-xs md:text-sm text-foreground hover:bg-accent/50 hover:border-accent/60 hover:text-accent-foreground transition-all duration-300 cursor-pointer focus:outline-none focus:ring-2 focus:ring-accent/50 focus:bg-accent/30"
     >
       {skill}
     </motion.span>
@@ -212,7 +184,7 @@ function CPProfilePill({
         transition: { duration: 0.2, ease: "easeOut" }
       }}
       whileTap={{ scale: 0.95 }}
-      className="flex items-center gap-2 px-3 py-2 rounded-lg border border-border bg-card/50 hover:bg-card hover:border-accent/60 transition-all duration-300 cursor-pointer focus:outline-none focus:ring-2 focus:ring-accent/50 group"
+      className="flex items-center gap-2 px-3 py-2 rounded-lg border border-border bg-card/10 hover:bg-card hover:border-accent/60 transition-all duration-300 cursor-pointer focus:outline-none focus:ring-2 focus:ring-accent/50 group"
     >
       <div className="relative w-5 h-5 flex-shrink-0">
         <Image
@@ -225,7 +197,7 @@ function CPProfilePill({
       </div>
 
       <div className="flex flex-col">
-        <span className="text-xs font-medium text-muted-foreground group-hover:text-foreground">
+        <span className="text-xs font-medium text-foreground group-hover:text-foreground">
           @{profile.username}
         </span>
         <div className="flex items-center gap-1">

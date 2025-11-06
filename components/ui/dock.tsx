@@ -179,7 +179,7 @@ export default function Dock({
             mouseX.set(touch.pageX);
           }
         }}
-        className={`${className} absolute bottom-4 left-1/2 transform -translate-x-1/2 flex items-end w-fit gap-3 rounded-2xl border border-border bg-card/80 backdrop-blur-lg pb-3 px-4 shadow-xl`}
+        className={`${className} absolute bottom-4 left-1/2 transform -translate-x-1/2 flex items-end w-fit gap-3 rounded-2xl border border-border bg-card/40 backdrop-blur-lg pb-3 px-4 shadow-xl`}
         style={{ height: panelHeight }}
         role="toolbar"
         aria-label="Application dock"

@@ -40,9 +40,6 @@ export default function Home() {
 
   return (
     <main className="relative min-h-screen">
-      {/* Background */}
-      <div className="fixed inset-0 bg-background z-0"></div>
-      
       {/* Content */}
       <div className="relative z-20">
         <Navbar />
