@@ -158,8 +158,22 @@ export default function Aurora(props: AuroraProps) {
         delete geometry.attributes.uv;
       }
 
-      const colorStopsArray = colorStops.map(hex => {
-        const c = new Color(hex);
+      const colorStopsArray = colorStops.map(colorStr => {
+        let c: Color;
+        if (colorStr.startsWith('rgb(')) {
+          // Parse rgb(r,g,b) format
+          const rgbMatch = colorStr.match(/rgb\((\d+),\s*(\d+),\s*(\d+)\)/);
+          if (rgbMatch) {
+            const r = parseInt(rgbMatch[1]) / 255;
+            const g = parseInt(rgbMatch[2]) / 255;
+            const b = parseInt(rgbMatch[3]) / 255;
+            c = new Color(r, g, b);
+          } else {
+            c = new Color('#808080'); // fallback gray
+          }
+        } else {
+          c = new Color(colorStr);
+        }
         return [c.r, c.g, c.b];
       });
 
@@ -187,8 +201,22 @@ export default function Aurora(props: AuroraProps) {
           program.uniforms.uAmplitude.value = propsRef.current.amplitude ?? 1.0;
           program.uniforms.uBlend.value = propsRef.current.blend ?? blend;
           const stops = propsRef.current.colorStops ?? colorStops;
-          program.uniforms.uColorStops.value = stops.map((hex: string) => {
-            const c = new Color(hex);
+          program.uniforms.uColorStops.value = stops.map((colorStr: string) => {
+            let c: Color;
+            if (colorStr.startsWith('rgb(')) {
+              // Parse rgb(r,g,b) format
+              const rgbMatch = colorStr.match(/rgb\((\d+),\s*(\d+),\s*(\d+)\)/);
+              if (rgbMatch) {
+                const r = parseInt(rgbMatch[1]) / 255;
+                const g = parseInt(rgbMatch[2]) / 255;
+                const b = parseInt(rgbMatch[3]) / 255;
+                c = new Color(r, g, b);
+              } else {
+                c = new Color('#808080'); // fallback gray
+              }
+            } else {
+              c = new Color(colorStr);
+            }
             return [c.r, c.g, c.b];
           });
           renderer.render({ scene: mesh });

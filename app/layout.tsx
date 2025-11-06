@@ -89,9 +89,9 @@ export default function RootLayout({
         {/* Aurora Background */}
         <div className="fixed inset-0 -z-20 w-screen h-screen">
           <Aurora
-            colorStops={["hsl(0 0% 12%)", "hsl(0 0% 40%)", "hsl(0 0% 95%)"]}
-            blend={0.5}
-            amplitude={1.0}
+            colorStops={["rgb(0,0,0)", "rgb(0,0,0)", "rgb(0,0,0)"]}
+            blend={0.4}
+            amplitude={0.8}
             speed={0.5}
           />
         </div>

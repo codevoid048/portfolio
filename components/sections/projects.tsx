@@ -186,11 +186,17 @@ function ProjectCard({
   return (
     <motion.div
       className="relative rounded-xl border border-border bg-card/10 p-6 group"
-      initial={{ opacity: 0, y: 50, rotateX: -15 }}
+      initial={{ 
+        opacity: 0, 
+        y: 50, 
+        rotateX: -15,
+        boxShadow: "0 0px 0px rgba(0, 0, 0, 0)"
+      }}
       whileInView={{
         opacity: 1,
         y: 0,
-        rotateX: 0
+        rotateX: 0,
+        boxShadow: "0 0px 0px rgba(0, 0, 0, 0)"
       }}
       viewport={{ once: true, margin: "-50px" }}
       transition={{
