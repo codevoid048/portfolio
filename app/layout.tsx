@@ -53,16 +53,16 @@ export const metadata: Metadata = {
     "TypeScript Developer",
   ],
   icons: {
-    icon: "/logo1.jpg",
-    shortcut: "/logo1.jpg",
-    apple: "/logo1.jpg",
+    icon: "/logo2.webp",
+    shortcut: "/logo2.webp",
+    apple: "/logo2.webp",
   },
   openGraph: {
     title: "William | Portfolio",
     description: "Full Stack Developer, Competitive Programmer, and ML Enthusiast",
     images: [
       {
-        url: "https://codevoid.site/logo1.jpg",
+        url: "https://codevoid.site/logo2.webp",
         width: 1200,
         height: 630,
         alt: "William Portfolio",
@@ -74,7 +74,7 @@ export const metadata: Metadata = {
     title: "William Keri | Portfolio",
     description: "Full Stack Developer, Competitive Programmer, and ML Enthusiast",
     creator: "@code__void",
-    images: ["https://codevoid.site/logo1.jpg"],
+    images: ["https://codevoid.site/logo2.webp"],
   },
 }
 
