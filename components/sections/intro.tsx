@@ -1,7 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Github, Linkedin, Mail, Twitter } from "lucide-react"
+import { Github, Linkedin, Mail, Twitter, MessageCircle } from "lucide-react"
 
 export default function Intro() {
   return (
@@ -38,6 +38,7 @@ export default function Intro() {
             <SocialLink icon={<Github className="h-5 w-5" />} href="https://github.com/codevoid048" label="GitHub" />
             <SocialLink icon={<Linkedin className="h-5 w-5" />} href="https://linkedin.com/in/codevoid" label="LinkedIn" />
             <SocialLink icon={<Twitter className="h-5 w-5" />} href="https://x.com/code__void" label="Twitter" />
+            <SocialLink icon={<MessageCircle className="h-5 w-5" />} href="https://wa.me/919966542463" label="Whatsapp" />
             <SocialLink icon={<Mail className="h-5 w-5" />} href="#contact" label="Email" />
           </motion.div>
         </motion.div>

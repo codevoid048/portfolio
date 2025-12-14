@@ -1,5 +1,5 @@
 import { motion } from "framer-motion"
-import { Github, Linkedin, Mail, Twitter } from "lucide-react"
+import { Github, Linkedin, Mail, Twitter, MessageCircle } from "lucide-react"
 import { useEffect, useState } from "react"
 
 export default function Footer() {
@@ -57,6 +57,15 @@ export default function Footer() {
               aria-label="Twitter"
             >
               <Twitter className="h-5 w-5" />
+            </a>
+            <a
+              href="https://wa.me/919966542463"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-foreground/70 hover:text-foreground/100 transition-colors duration-300"
+              aria-label="Whatsapp"
+            >
+              <MessageCircle className="h-5 w-5" />
             </a>
             <a
               href="mailto:williamkeri007@gmail.com"
