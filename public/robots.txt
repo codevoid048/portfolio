@@ -1,0 +1,16 @@
+# https://www.robotstxt.org/robotstxt.html
+
+# Allow all crawlers full access
+User-agent: *
+Allow: /
+
+# Prevent crawling of internal assets
+User-agent: *
+Disallow: /_next/
+Disallow: /api/
+
+# Sitemap location
+Sitemap: https://codevoid.site/sitemap.xml
+
+# Crawl-delay for respectful crawling (optional)
+# Crawl-delay: 10

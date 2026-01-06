@@ -1,0 +1,28 @@
+{
+  "name": "William Keri - Software Engineer",
+  "short_name": "WK Portfolio",
+  "description": "Personal portfolio of William Keri - Full Stack Developer, Competitive Programmer, and ML Enthusiast",
+  "start_url": "/",
+  "id": "/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#000000",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "en",
+  "categories": ["portfolio", "personal", "developer"],
+  "icons": [
+    {
+      "src": "/logo.webp",
+      "sizes": "192x192",
+      "type": "image/webp",
+      "purpose": "any"
+    },
+    {
+      "src": "/logo.webp",
+      "sizes": "512x512",
+      "type": "image/webp",
+      "purpose": "maskable"
+    }
+  ]
+}
