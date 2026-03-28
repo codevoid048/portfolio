@@ -1,6 +1,6 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { Inter, JetBrains_Mono } from "next/font/google"
+import { Outfit, JetBrains_Mono } from "next/font/google"
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import ErrorReporter from "@/components/ErrorReporter";
@@ -8,9 +8,9 @@ import Script from "next/script";
 import { Analytics } from "@vercel/analytics/next"
 import Aurora from "@/components/ui/aurora"
 
-const inter = Inter({ 
+const outfit = Outfit({ 
   subsets: ["latin"],
-  variable: "--font-inter"
+  variable: "--font-sans"
 })
 
 const jetbrainsMono = JetBrains_Mono({
@@ -195,17 +195,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${jetbrainsMono.variable}`} suppressHydrationWarning>
+    <html lang="en" className={`${outfit.variable} ${jetbrainsMono.variable}`} suppressHydrationWarning>
       <body className="antialiased font-sans relative">
         {/* Aurora Background */}
-        <div className="fixed inset-0 -z-20 w-screen h-screen">
+        {/* <div className="fixed inset-0 -z-20 w-screen h-screen">
           <Aurora
             colorStops={["rgb(0,0,0)", "rgb(0,0,0)", "rgb(0,0,0)"]}
             blend={0.4}
             amplitude={0.8}
             speed={0.5}
           />
-        </div>
+        </div> */}
 
         <ErrorReporter />
         <Script

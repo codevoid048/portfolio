@@ -1,91 +1,60 @@
-"use client"
-
-import { motion } from "framer-motion"
+import { cn } from "@/lib/utils"
 
 type Experience = {
   role: string
   company: string
   period: string
   summary: string
+  type: "Full-time" | "Internship" | "Part-time" | "Freelance"
 }
 
 const experiences: Experience[] = [
   {
-    role: "Full Stack Developer Intern",
-    company: "LabFox.Studio, Remote",
-    period: "Jul 2025 - Present",
-    summary: "Contribute to the backend architecture leveraging FastAPI, Kafka and LangGraph to power RAG features. Developed comprehensive APIs to integrate data from open-source DataHub SDKs, REST OpenAPIs, and GraphQL endpoints, resulting in 30-40% improved API response times. Implemented scalable dataset processing pipelines through strategic chunking and optimized retrieval workflows.",
+    role: "SDE Intern",
+    company: "CoComply AI",
+    period: "Nov 2025 - Present",
+    type: "Internship",
+    summary: "Built compliance and workflow automation tools for international banking clients using Django, Next.js, and LLM-powered features. Developed internal dashboards that reduced manual compliance review time for banking operations. Collaborated with cross-functional teams across time zones to deliver enterprise-grade features under tight regulatory requirements.",
   },
   {
-    role: "Software Engineer",
+    role: "Full Stack Developer Intern",
+    company: "LabFox.Studio",
+    period: "Jul 2025 - Nov 2025",
+    type: "Internship",
+    summary: "Contributed to backend architecture leveraging FastAPI, Kafka and LangGraph to power RAG features. Developed comprehensive APIs to integrate data from open-source DataHub SDKs, REST OpenAPIs, and GraphQL endpoints, resulting in a 30-40% improvement in API response times. Implemented scalable dataset processing pipelines through strategic chunking and optimized retrieval workflows.",
+  },
+  {
+    role: "Freelance Full Stack Developer",
     company: "Self-Employed",
     period: "Jul 2025 - Present",
-    summary: "Managing end-to-end freelance projects independently, including client communication, requirement gathering, and technical negotiations to deliver tailored solutions. Architecting robust cloud infrastructure using AWS Lambda, S3, and CloudFormation for scalability and efficient resource management. Integrating Redis for backend caching and Cloudflare for global CDN and DNS management, improving performance.",
+    type: "Freelance",
+    summary: "Delivered 3 client projects end-to-end across e-commerce and business presence verticals, managing the full project lifecycle from requirements gathering to deployment. All delivered projects remain in active production with ongoing support and client referrals driving 50% of new engagements.",
   },
 ]
 
-export default function WorkExperience() {
+export default function WorkExperience({ className }: { className?: string }) {
   return (
-    <section id="experience" className="py-8 md:py-16 relative overflow-hidden">
-
-      <div className="container mx-auto px-4 relative z-10">
-        <motion.div
-          className="animate-on-scroll max-w-2xl mx-auto"
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.8 }}
-        >
-          <motion.h2
-            className="text-3xl md:text-4xl font-bold font-sans mb-6 text-center text-foreground"
-            initial={{ scale: 0.8, opacity: 0 }}
-            whileInView={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
-            Experience
-          </motion.h2>
-
-          <div className="space-y-6">
-            {experiences.map((exp, idx) => (
-              <motion.article
-                key={idx}
-                initial={{ opacity: 0, y: 50, rotateX: -15 }}
-                whileInView={{
-                  opacity: 1,
-                  y: 0,
-                  rotateX: 0
-                }}
-                viewport={{ once: true, margin: "-50px" }}
-                transition={{
-                  duration: 0.6,
-                  delay: idx * 0.15,
-                  type: "spring",
-                  bounce: 0.3
-                }}
-                className="relative rounded-xl border border-border bg-card/10 p-6"
-              >
-                <div className="flex items-start justify-between gap-4">
-                  <motion.div
-                    initial={{ x: -20, opacity: 0 }}
-                    whileInView={{ x: 0, opacity: 1 }}
-                    transition={{ delay: idx * 0.15 + 0.2 }}
-                  >
-                    <h3 className="text-xl font-semibold font-sans text-foreground">{exp.role}</h3>
-                    <p className="text-sm font-bold text-foreground">{exp.company} • {exp.period}</p>
-                  </motion.div>
-                </div>
-                <motion.p
-                  className="mt-4 text-foreground leading-relaxed"
-                  initial={{ y: 20, opacity: 0 }}
-                  whileInView={{ y: 0, opacity: 1 }}
-                  transition={{ delay: idx * 0.15 + 0.3 }}
-                >
-                  {exp.summary}
-                </motion.p>
-              </motion.article>
-            ))}
+    <section className={cn("space-y-8", className)}>
+      <h2 className="text-lg font-semibold text-foreground">Experience</h2>
+      <div className="space-y-8">
+        {experiences.map((exp, idx) => (
+          <div key={idx} className="group relative border-l border-border/50 pl-6 pb-2">
+            <div className="absolute -left-[5px] top-2 h-2.5 w-2.5 rounded-full border border-border bg-background group-hover:border-foreground transition-colors" />
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-2">
+              <h3 className="font-medium text-foreground">{exp.role}</h3>
+              <span className="text-xs text-muted-foreground font-mono">{exp.period}</span>
+            </div>
+            <div className="flex items-center gap-2 mb-3">
+              <p className="text-sm font-medium text-muted-foreground">{exp.company}</p>
+              <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-muted text-muted-foreground font-medium uppercase tracking-wider">
+                {exp.type}
+              </span>
+            </div>
+            <p className="text-sm text-muted-foreground leading-relaxed max-w-prose">
+              {exp.summary}
+            </p>
           </div>
-        </motion.div>
+        ))}
       </div>
     </section>
   )

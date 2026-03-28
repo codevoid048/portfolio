@@ -1,14 +1,14 @@
 "use client"
 
 import { useEffect, useRef } from "react"
-import { motion, useScroll, useTransform } from "framer-motion"
+// import { motion, useScroll, useTransform } from "framer-motion"
 import Skills from "@/components/sections/skills"
 import Projects from "@/components/sections/projects"
 import Contact from "@/components/sections/contact"
 import Footer from "@/components/sections/footer"
 // import { Button } from "@/components/ui/button"
 // import { ArrowUp } from "lucide-react"
-import Navbar from "@/components/sections/navbar"
+// import Navbar from "@/components/sections/navbar"
 import Intro from "@/components/sections/intro"
 import WorkExperience from "@/components/sections/work-experience"
 
@@ -39,18 +39,14 @@ export default function Home() {
   }, [])
 
   return (
-    <main className="relative min-h-screen">
-      {/* Content */}
-      <div className="relative z-20">
-        <Navbar />
+    <main className="min-h-screen relative">
+      <div className="max-w-2xl mx-auto px-6 py-24 space-y-24">
         <Intro />
         <WorkExperience />
-        <Skills />
         <Projects />
+        <Skills />
         <Contact />
-        <div className="hidden md:block">
-          <Footer />
-        </div>
+        <Footer />
       </div>
     </main>
   )

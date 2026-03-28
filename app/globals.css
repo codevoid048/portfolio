@@ -34,11 +34,11 @@
 
   .dark {
     /* Dark mode overrides */
-    --background: 240 10% 6.5%;
+    --background: 240 6% 16%;
     --foreground: 0 0% 98%;
-    --card: 240 10% 6.5%;
+    --card: 240 6% 18%;
     --card-foreground: 0 0% 98%;
-    --popover: 240 10% 6.5%;
+    --popover: 240 6% 18%;
     --popover-foreground: 0 0% 98%;
     --secondary: 240 3.7% 18%;
     --secondary-foreground: 0 0% 98%;
@@ -57,11 +57,19 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground font-sans;
+    @apply bg-background text-foreground font-sans antialiased;
+    background-image: radial-gradient(hsl(var(--muted-foreground) / 0.15) 1px, transparent 1px);
+    background-size: 24px 24px;
+    background-position: 0 0;
   }
 
   /* Improved heading typography */
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     font-family: var(--font-inter), system-ui, sans-serif;
     letter-spacing: -0.025em;
     line-height: 1.1;
