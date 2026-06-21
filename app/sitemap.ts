@@ -3,7 +3,7 @@ import type { MetadataRoute } from 'next'
 export const dynamic = 'force-static'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://codevoid.site'
+  const baseUrl = 'https://williamkeri.com'
   const lastModified = new Date()
 
   return [

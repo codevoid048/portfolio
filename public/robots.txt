@@ -10,7 +10,7 @@ Disallow: /_next/
 Disallow: /api/
 
 # Sitemap location
-Sitemap: https://codevoid.site/sitemap.xml
+Sitemap: https://williamkeri.com/sitemap.xml
 
 # Crawl-delay for respectful crawling (optional)
 # Crawl-delay: 10

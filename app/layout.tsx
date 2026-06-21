@@ -22,8 +22,8 @@ const jsonLdPerson = {
   "@context": "https://schema.org",
   "@type": "Person",
   "name": "William Keri",
-  "url": "https://codevoid.site",
-  "image": "https://codevoid.site/logo.webp",
+  "url": "https://williamkeri.com",
+  "image": "https://williamkeri.com/logo.webp",
   "jobTitle": ["Software Engineer", "Full Stack Developer", "Software Engineer", "ML Engineer"],
   "description": "Software Engineer, Full Stack Developer, Competitive Programmer, and Machine Learning Enthusiast",
   "knowsAbout": [
@@ -53,16 +53,16 @@ const jsonLdWebSite = {
   "@context": "https://schema.org",
   "@type": "WebSite",
   "name": "William Keri Portfolio",
-  "url": "https://codevoid.site",
+  "url": "https://williamkeri.com",
   "description": "Personal portfolio website of William Keri, Software Engineer, Full Stack Developer, Competitive Programmer, and Machine Learning Enthusiast",
   "author": {
     "@type": "Person",
     "name": "William Keri",
-    "url": "https://codevoid.site"
+    "url": "https://williamkeri.com"
   },
   "potentialAction": {
     "@type": "SearchAction",
-    "target": "https://codevoid.site/#search?q={search_term_string}",
+    "target": "https://williamkeri.com/#search?q={search_term_string}",
     "query-input": "required name=search_term_string"
   }
 }
@@ -75,38 +75,38 @@ const jsonLdBreadcrumb = {
       "@type": "ListItem",
       "position": 1,
       "name": "Home",
-      "item": "https://codevoid.site"
+      "item": "https://williamkeri.com"
     },
     {
       "@type": "ListItem",
       "position": 2,
       "name": "Experience",
-      "item": "https://codevoid.site/#experience"
+      "item": "https://williamkeri.com/#experience"
     },
     {
       "@type": "ListItem",
       "position": 3,
       "name": "Projects",
-      "item": "https://codevoid.site/#projects"
+      "item": "https://williamkeri.com/#projects"
     },
     {
       "@type": "ListItem",
       "position": 4,
       "name": "Contact",
-      "item": "https://codevoid.site/#contact"
+      "item": "https://williamkeri.com/#contact"
     }
   ]
 }
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://codevoid.site"),
+  metadataBase: new URL("https://williamkeri.com"),
   title: {
     default: "William Keri | Software Engineer",
     template: "%s | William Keri"
   },
   description: "Personal portfolio of William Keri - Software Engineer, Full Stack Developer, Competitive Programmer, and Machine Learning Enthusiast. Explore projects, skills, and work experience.",
   alternates: {
-    canonical: "https://codevoid.site",
+    canonical: "https://williamkeri.com",
   },
   robots: {
     index: true,
@@ -158,13 +158,13 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://codevoid.site",
+    url: "https://williamkeri.com",
     siteName: "William Keri Portfolio",
     title: "William Keri | Software Engineer",
     description: "Software Engineer, Full Stack Developer, Competitive Programmer, and ML Enthusiast. Explore my projects, skills, and work experience.",
     images: [
       {
-        url: "https://codevoid.site/logo.webp",
+        url: "https://williamkeri.com/logo.webp",
         width: 1200,
         height: 630,
         alt: "William Keri - Software Engineer",
@@ -178,7 +178,7 @@ export const metadata: Metadata = {
     title: "William Keri | Software Engineer",
     description: "Software Engineer, Full Stack Developer, Competitive Programmer, and ML Enthusiast. Explore my projects, skills, and work experience.",
     images: {
-      url: "https://codevoid.site/logo.webp",
+      url: "https://williamkeri.com/logo.webp",
       alt: "William Keri - Software Engineer",
     },
   },
