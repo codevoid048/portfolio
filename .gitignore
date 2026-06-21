@@ -19,3 +19,8 @@ next-env.d.ts
 
 
 .env
+.dev.vars
+
+# wrangler / open-next
+.wrangler/
+.open-next/
